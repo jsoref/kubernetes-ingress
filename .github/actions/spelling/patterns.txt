@@ -1,0 +1,28 @@
+# See https://github.com/check-spelling/check-spelling/wiki/Configuration-Examples:-patterns
+
+# microsoft
+\b(?:https?://|)(?:(?:download\.visualstudio|docs|msdn2?)\.microsoft|blogs\.msdn)\.com/[-_a-zA-Z0-9()=./%]*
+# powerbi
+\bapp\.powerbi\.com/reportEmbed/[^"' ]*
+# office
+\bforms\.office\.com/[-\w.?/=_]*
+
+# URL escaped characters
+\%[0-9A-F]{2}
+
+#
+^Request ID: [0-9a-f]*
+^\s*Server name:.*
+
+# Python stringprefix / binaryprefix
+\b(?:B|BR|Br|F|FR|Fr|R|RB|RF|Rb|Rf|U|UR|Ur|b|bR|br|f|fR|fr|r|rB|rF|rb|rf|u|uR|ur)'
+
+# version suffix <word>v#
+[Vv]\d+(?:\b|(?=[a-zA-Z_]))
+
+# acceptable duplicates
+\s(long|LONG|very)(?: \g{-1})+\s
+\@param\s+(\w+)\s+\g{-1}\s
+
+# ignore long runs of a single character:
+\b([A-Za-z])\g{-1}{3,}\b
