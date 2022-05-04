@@ -4927,7 +4927,7 @@ func TestGenerateSSLConfig(t *testing.T) {
 				RejectHandshake: true,
 			},
 			expectedWarnings: Warnings{
-				nil: []string{"TLS secret secret is invalid: secret doesn't exist"},
+				nil: []string{"TLS secret is invalid: secret doesn't exist"},
 			},
 			msg: "secret doesn't exist in the cluster with HTTPS",
 		},
@@ -4949,7 +4949,7 @@ func TestGenerateSSLConfig(t *testing.T) {
 				RejectHandshake: true,
 			},
 			expectedWarnings: Warnings{
-				nil: []string{"TLS secret secret is of a wrong type 'nginx.org/ca', must be 'kubernetes.io/tls'"},
+				nil: []string{"TLS secret is of a wrong type 'nginx.org/ca', must be 'kubernetes.io/tls'"},
 			},
 			msg: "wrong secret type",
 		},
