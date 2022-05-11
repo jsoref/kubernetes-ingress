@@ -94,7 +94,7 @@ func generateNginxCfg(ingEx *IngressEx, apResources *AppProtectResources, dosRes
 
 	// HTTP2 is required for gRPC to function
 	if len(grpcServices) > 0 && !cfgParams.HTTP2 {
-		glog.Errorf("Ingress %s/%s: annotation nginx.org/grpc-services requires HTTP2, ignoring", ingEx.Ingress.Namespace, ingEx.Ingress.Name)
+		glog.Errorf("Ingress '%s/%s': annotation nginx.org/grpc-services requires HTTP2, ignoring", ingEx.Ingress.Namespace, ingEx.Ingress.Name)
 		grpcServices = make(map[string]bool)
 	}
 
@@ -301,9 +301,9 @@ func generateJWTConfig(owner runtime.Object, secretRefs map[string]*secrets.Secr
 		secretType = secretRef.Secret.Type
 	}
 	if secretType != "" && secretType != secrets.SecretTypeJWK {
-		warnings.AddWarningf(owner, "JWK secret %s is of a wrong type '%s', must be '%s'", cfgParams.JWTKey, secretType, secrets.SecretTypeJWK)
+		warnings.AddWarningf(owner, "JWK secret '%s' is of a wrong type '%s', must be '%s'", cfgParams.JWTKey, secretType, secrets.SecretTypeJWK)
 	} else if secretRef.Error != nil {
-		warnings.AddWarningf(owner, "JWK secret %s is invalid: %v", cfgParams.JWTKey, secretRef.Error)
+		warnings.AddWarningf(owner, "JWK secret '%s' is invalid: %v", cfgParams.JWTKey, secretRef.Error)
 	}
 
 	// Key is configured for all cases, including when the secret is (1) invalid or (2) of a wrong type.
@@ -360,10 +360,10 @@ func addSSLConfig(server *version1.Server, owner runtime.Object, host string, in
 		}
 		if secretType != "" && secretType != api_v1.SecretTypeTLS {
 			rejectHandshake = true
-			warnings.AddWarningf(owner, "TLS secret %s is of a wrong type '%s', must be '%s'", tlsSecret, secretType, api_v1.SecretTypeTLS)
+			warnings.AddWarningf(owner, "TLS secret '%s' is of a wrong type '%s', must be '%s'", tlsSecret, secretType, api_v1.SecretTypeTLS)
 		} else if secretRef.Error != nil {
 			rejectHandshake = true
-			warnings.AddWarningf(owner, "TLS secret %s is invalid: %v", tlsSecret, secretRef.Error)
+			warnings.AddWarningf(owner, "TLS secret '%s' is invalid: %v", tlsSecret, secretRef.Error)
 		} else {
 			pemFile = secretRef.Path
 		}
@@ -455,7 +455,7 @@ func createUpstream(ingEx *IngressEx, name string, backend *networking.IngressBa
 		// Always false for NGINX OSS
 		_, isExternalNameSvc := ingEx.ExternalNameSvcs[backend.Service.Name]
 		if isExternalNameSvc && !isResolverConfigured {
-			glog.Warningf("A resolver must be configured for Type ExternalName service %s, no upstream servers will be created", backend.Service.Name)
+			glog.Warningf("A resolver must be configured for Type ExternalName service '%s', no upstream servers will be created", backend.Service.Name)
 			endps = []string{}
 		}
 

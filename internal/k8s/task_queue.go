@@ -76,7 +76,7 @@ func (tq *taskQueue) Len() int {
 
 // RequeueAfter adds the task to the queue after the given duration
 func (tq *taskQueue) RequeueAfter(t task, err error, after time.Duration) {
-	glog.Errorf("Requeuing %v after %s, err %v", t.Key, after.String(), err)
+	glog.Errorf("Requeuing %v after '%s', err %v", t.Key, after.String(), err)
 	go func(t task, after time.Duration) {
 		time.Sleep(after)
 		tq.queue.Add(t)

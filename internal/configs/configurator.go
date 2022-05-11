@@ -980,7 +980,7 @@ func (cnf *Configurator) updatePlusEndpoints(ingEx *IngressEx) error {
 		endps, exists := ingEx.Endpoints[ingEx.Ingress.Spec.DefaultBackend.Service.Name+GetBackendPortAsString(ingEx.Ingress.Spec.DefaultBackend.Service.Port)]
 		if exists {
 			if _, isExternalName := ingEx.ExternalNameSvcs[ingEx.Ingress.Spec.DefaultBackend.Service.Name]; isExternalName {
-				glog.V(3).Infof("Service %s is Type ExternalName, skipping NGINX Plus endpoints update via API", ingEx.Ingress.Spec.DefaultBackend.Service.Name)
+				glog.V(3).Infof("Service '%s' is Type ExternalName, skipping NGINX Plus endpoints update via API", ingEx.Ingress.Spec.DefaultBackend.Service.Name)
 			} else {
 				name := getNameForUpstream(ingEx.Ingress, emptyHost, ingEx.Ingress.Spec.DefaultBackend)
 				err := cnf.updateServersInPlus(name, endps, cfg)
@@ -1000,7 +1000,7 @@ func (cnf *Configurator) updatePlusEndpoints(ingEx *IngressEx) error {
 			endps, exists := ingEx.Endpoints[path.Backend.Service.Name+GetBackendPortAsString(path.Backend.Service.Port)]
 			if exists {
 				if _, isExternalName := ingEx.ExternalNameSvcs[path.Backend.Service.Name]; isExternalName {
-					glog.V(3).Infof("Service %s is Type ExternalName, skipping NGINX Plus endpoints update via API", path.Backend.Service.Name)
+					glog.V(3).Infof("Service '%s' is Type ExternalName, skipping NGINX Plus endpoints update via API", path.Backend.Service.Name)
 					continue
 				}
 

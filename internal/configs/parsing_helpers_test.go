@@ -541,7 +541,7 @@ func TestParseBool(t *testing.T) {
 		}
 
 		if result != test.expected {
-			t.Errorf("TestParseBool(%q) returned %t expected %t", test.input, result, test.expected)
+			t.Errorf("TestParseBool(%q) returned '%t' expected '%t'", test.input, result, test.expected)
 		}
 	}
 
@@ -699,7 +699,7 @@ func TestParseFloat64(t *testing.T) {
 		}
 
 		if result != test.expected {
-			t.Errorf("TestParseFloat64(%q) returned %e expected %e", test.input, result, test.expected)
+			t.Errorf("TestParseFloat64(%q) returned '%e' expected '%e'", test.input, result, test.expected)
 		}
 	}
 

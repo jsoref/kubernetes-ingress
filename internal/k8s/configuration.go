@@ -512,7 +512,7 @@ func (c *Configuration) AddOrUpdateVirtualServer(vs *conf_v1.VirtualServer) ([]R
 			Object:  vs,
 			IsError: true,
 			Reason:  "Rejected",
-			Message: fmt.Sprintf("VirtualServer %s was rejected with error: %s", getResourceKey(&vs.ObjectMeta), validationError.Error()),
+			Message: fmt.Sprintf("VirtualServer '%s' was rejected with error: %s", getResourceKey(&vs.ObjectMeta), validationError.Error()),
 		}
 		problems = append(problems, p)
 	}
@@ -561,7 +561,7 @@ func (c *Configuration) AddOrUpdateVirtualServerRoute(vsr *conf_v1.VirtualServer
 			Object:  vsr,
 			IsError: true,
 			Reason:  "Rejected",
-			Message: fmt.Sprintf("VirtualServerRoute %s was rejected with error: %s", getResourceKey(&vsr.ObjectMeta), validationError.Error()),
+			Message: fmt.Sprintf("VirtualServerRoute '%s' was rejected with error: %s", getResourceKey(&vsr.ObjectMeta), validationError.Error()),
 		}
 		problems = append(problems, p)
 	}
@@ -670,7 +670,7 @@ func (c *Configuration) AddOrUpdateTransportServer(ts *conf_v1alpha1.TransportSe
 			Object:  ts,
 			IsError: true,
 			Reason:  "Rejected",
-			Message: fmt.Sprintf("TransportServer %s was rejected with error: %s", getResourceKey(&ts.ObjectMeta), validationErr.Error()),
+			Message: fmt.Sprintf("TransportServer '%s' was rejected with error: %s", getResourceKey(&ts.ObjectMeta), validationErr.Error()),
 		}
 		problems = append(problems, p)
 	}
@@ -772,7 +772,7 @@ func (c *Configuration) buildListenersAndTSConfigurations() (newListeners map[st
 			continue
 		}
 
-		warning := fmt.Sprintf("listener %s is taken by another resource", listener.Name)
+		warning := fmt.Sprintf("listener '%s' is taken by another resource", listener.Name)
 
 		if !holder.Wins(tsc) {
 			holder.AddWarning(warning)
@@ -1012,7 +1012,7 @@ func (c *Configuration) addProblemsForTSConfigsWithoutActiveListener(tsConfigs m
 				Object:  tsc.TransportServer,
 				IsError: false,
 				Reason:  "Rejected",
-				Message: fmt.Sprintf("Listener %s doesn't exist", tsc.TransportServer.Spec.Listener.Name),
+				Message: fmt.Sprintf("Listener '%s' doesn't exist", tsc.TransportServer.Spec.Listener.Name),
 			}
 			problems[tsc.GetKeyWithKind()] = p
 			continue
@@ -1023,7 +1023,7 @@ func (c *Configuration) addProblemsForTSConfigsWithoutActiveListener(tsConfigs m
 				Object:  tsc.TransportServer,
 				IsError: false,
 				Reason:  "Rejected",
-				Message: fmt.Sprintf("Listener %s is taken by another resource", tsc.TransportServer.Spec.Listener.Name),
+				Message: fmt.Sprintf("Listener '%s' is taken by another resource", tsc.TransportServer.Spec.Listener.Name),
 			}
 			problems[tsc.GetKeyWithKind()] = p
 		}
@@ -1134,7 +1134,7 @@ func (c *Configuration) addProblemsForOrphanOrIgnoredVsrs(problems map[string]Co
 				Object:  vsr,
 				IsError: false,
 				Reason:  "Ignored",
-				Message: fmt.Sprintf("VirtualServer %s ignores VirtualServerRoute", getResourceKey(&vsConfig.VirtualServer.ObjectMeta)),
+				Message: fmt.Sprintf("VirtualServer '%s' ignores VirtualServerRoute", getResourceKey(&vsConfig.VirtualServer.ObjectMeta)),
 			}
 			k := getResourceKeyWithKind(virtualServerRouteKind, &vsr.ObjectMeta)
 			problems[k] = p
@@ -1307,7 +1307,7 @@ func (c *Configuration) buildHostsAndResources() (newHosts map[string]Resource, 
 				continue
 			}
 
-			warning := fmt.Sprintf("host %s is taken by another resource", rule.Host)
+			warning := fmt.Sprintf("host '%s' is taken by another resource", rule.Host)
 
 			if !holder.Wins(resource) {
 				holder.AddWarning(warning)
@@ -1334,7 +1334,7 @@ func (c *Configuration) buildHostsAndResources() (newHosts map[string]Resource, 
 			continue
 		}
 
-		warning := fmt.Sprintf("host %s is taken by another resource", vs.Spec.Host)
+		warning := fmt.Sprintf("host '%s' is taken by another resource", vs.Spec.Host)
 
 		if !holder.Wins(resource) {
 			newHosts[vs.Spec.Host] = resource
@@ -1363,7 +1363,7 @@ func (c *Configuration) buildHostsAndResources() (newHosts map[string]Resource, 
 				continue
 			}
 
-			warning := fmt.Sprintf("host %s is taken by another resource", ts.Spec.Host)
+			warning := fmt.Sprintf("host '%s' is taken by another resource", ts.Spec.Host)
 
 			if !holder.Wins(resource) {
 				newHosts[ts.Spec.Host] = resource
@@ -1403,7 +1403,7 @@ func (c *Configuration) buildMinionConfigs(masterHost string) ([]*MinionConfigur
 				continue
 			}
 
-			warning := fmt.Sprintf("path %s is taken by another resource", p.Path)
+			warning := fmt.Sprintf("path '%s' is taken by another resource", p.Path)
 
 			if !chooseObjectMetaWinner(&holder.Ingress.ObjectMeta, &ingress.ObjectMeta) {
 				paths[p.Path] = minionConfig
@@ -1442,14 +1442,14 @@ func (c *Configuration) buildVirtualServerRoutes(vs *conf_v1.VirtualServer) ([]*
 
 		vsr, exists := c.virtualServerRoutes[vsrKey]
 		if !exists {
-			warning := fmt.Sprintf("VirtualServerRoute %s doesn't exist or invalid", vsrKey)
+			warning := fmt.Sprintf("VirtualServerRoute '%s' doesn't exist or invalid", vsrKey)
 			warnings = append(warnings, warning)
 			continue
 		}
 
 		err := c.virtualServerValidator.ValidateVirtualServerRouteForVirtualServer(vsr, vs.Spec.Host, r.Path)
 		if err != nil {
-			warning := fmt.Sprintf("VirtualServerRoute %s is invalid: %v", vsrKey, err)
+			warning := fmt.Sprintf("VirtualServerRoute '%s' is invalid: %v", vsrKey, err)
 			warnings = append(warnings, warning)
 			continue
 		}

@@ -113,12 +113,12 @@ func (tsv *TransportServerValidator) validateTLSPassthroughListener(listener *v1
 	}
 
 	if listener.Name == v1alpha1.TLSPassthroughListenerName && listener.Protocol != v1alpha1.TLSPassthroughListenerProtocol {
-		msg := fmt.Sprintf("must be '%s' for the built-in %s listener", v1alpha1.TLSPassthroughListenerProtocol, v1alpha1.TLSPassthroughListenerName)
+		msg := fmt.Sprintf("must be '%s' for the built-in '%s' listener", v1alpha1.TLSPassthroughListenerProtocol, v1alpha1.TLSPassthroughListenerName)
 		return append(allErrs, field.Invalid(fieldPath.Child("protocol"), listener.Protocol, msg))
 	}
 
 	if listener.Protocol == v1alpha1.TLSPassthroughListenerProtocol && listener.Name != v1alpha1.TLSPassthroughListenerName {
-		msg := fmt.Sprintf("must be '%s' for a listener with the protocol %s", v1alpha1.TLSPassthroughListenerName, v1alpha1.TLSPassthroughListenerProtocol)
+		msg := fmt.Sprintf("must be '%s' for a listener with the protocol '%s'", v1alpha1.TLSPassthroughListenerName, v1alpha1.TLSPassthroughListenerProtocol)
 		return append(allErrs, field.Invalid(fieldPath.Child("name"), listener.Name, msg))
 	}
 

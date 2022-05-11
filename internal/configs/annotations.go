@@ -76,13 +76,13 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 	if lbMethod, exists := ingEx.Ingress.Annotations["nginx.org/lb-method"]; exists {
 		if isPlus {
 			if parsedMethod, err := ParseLBMethodForPlus(lbMethod); err != nil {
-				glog.Errorf("Ingress %s/%s: Invalid value for the nginx.org/lb-method: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), lbMethod, err)
+				glog.Errorf("Ingress '%s/%s': Invalid value for the nginx.org/lb-method: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), lbMethod, err)
 			} else {
 				cfgParams.LBMethod = parsedMethod
 			}
 		} else {
 			if parsedMethod, err := ParseLBMethod(lbMethod); err != nil {
-				glog.Errorf("Ingress %s/%s: Invalid value for the nginx.org/lb-method: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), lbMethod, err)
+				glog.Errorf("Ingress '%s/%s': Invalid value for the nginx.org/lb-method: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), lbMethod, err)
 			} else {
 				cfgParams.LBMethod = parsedMethod
 			}
@@ -120,7 +120,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 
 	if slowStart, exists := ingEx.Ingress.Annotations["nginx.com/slow-start"]; exists {
 		if parsedSlowStart, err := ParseTime(slowStart); err != nil {
-			glog.Errorf("Ingress %s/%s: Invalid value nginx.org/slow-start: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), slowStart, err)
+			glog.Errorf("Ingress '%s/%s': Invalid value nginx.org/slow-start: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), slowStart, err)
 		} else {
 			if isPlus {
 				cfgParams.SlowStart = parsedSlowStart
@@ -163,7 +163,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 
 	if proxyConnectTimeout, exists := ingEx.Ingress.Annotations["nginx.org/proxy-connect-timeout"]; exists {
 		if parsedProxyConnectTimeout, err := ParseTime(proxyConnectTimeout); err != nil {
-			glog.Errorf("Ingress %s/%s: Invalid value nginx.org/proxy-connect-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), proxyConnectTimeout, err)
+			glog.Errorf("Ingress '%s/%s': Invalid value nginx.org/proxy-connect-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), proxyConnectTimeout, err)
 		} else {
 			cfgParams.ProxyConnectTimeout = parsedProxyConnectTimeout
 		}
@@ -171,7 +171,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 
 	if proxyReadTimeout, exists := ingEx.Ingress.Annotations["nginx.org/proxy-read-timeout"]; exists {
 		if parsedProxyReadTimeout, err := ParseTime(proxyReadTimeout); err != nil {
-			glog.Errorf("Ingress %s/%s: Invalid value nginx.org/proxy-read-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), proxyReadTimeout, err)
+			glog.Errorf("Ingress '%s/%s': Invalid value nginx.org/proxy-read-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), proxyReadTimeout, err)
 		} else {
 			cfgParams.ProxyReadTimeout = parsedProxyReadTimeout
 		}
@@ -179,7 +179,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 
 	if proxySendTimeout, exists := ingEx.Ingress.Annotations["nginx.org/proxy-send-timeout"]; exists {
 		if parsedProxySendTimeout, err := ParseTime(proxySendTimeout); err != nil {
-			glog.Errorf("Ingress %s/%s: Invalid value nginx.org/proxy-send-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), proxySendTimeout, err)
+			glog.Errorf("Ingress '%s/%s': Invalid value nginx.org/proxy-send-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), proxySendTimeout, err)
 		} else {
 			cfgParams.ProxySendTimeout = parsedProxySendTimeout
 		}
@@ -252,7 +252,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 			}
 
 			if parsingErrors {
-				glog.Errorf("Ingress %s/%s: There are configuration issues with hsts annotations, skipping annotations for all hsts settings", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName())
+				glog.Errorf("Ingress '%s/%s': There are configuration issues with hsts annotations, skipping annotations for all hsts settings", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName())
 			} else {
 				cfgParams.HSTS = hsts
 				if existsMA {
@@ -302,7 +302,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 	if values, exists := ingEx.Ingress.Annotations["nginx.org/listen-ports"]; exists {
 		ports, err := ParsePortList(values)
 		if err != nil {
-			glog.Errorf("In %v nginx.org/listen-ports contains invalid declaration: %v, ignoring", ingEx.Ingress.Name, err)
+			glog.Errorf("In '%v' nginx.org/listen-ports contains invalid declaration: %v, ignoring", ingEx.Ingress.Name, err)
 		}
 		if len(ports) > 0 {
 			cfgParams.Ports = ports
@@ -312,7 +312,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 	if values, exists := ingEx.Ingress.Annotations["nginx.org/listen-ports-ssl"]; exists {
 		sslPorts, err := ParsePortList(values)
 		if err != nil {
-			glog.Errorf("In %v nginx.org/listen-ports-ssl contains invalid declaration: %v, ignoring", ingEx.Ingress.Name, err)
+			glog.Errorf("In '%v' nginx.org/listen-ports-ssl contains invalid declaration: %v, ignoring", ingEx.Ingress.Name, err)
 		}
 		if len(sslPorts) > 0 {
 			cfgParams.SSLPorts = sslPorts
@@ -345,7 +345,7 @@ func parseAnnotations(ingEx *IngressEx, baseCfgParams *ConfigParams, isPlus bool
 
 	if failTimeout, exists := ingEx.Ingress.Annotations["nginx.org/fail-timeout"]; exists {
 		if parsedFailTimeout, err := ParseTime(failTimeout); err != nil {
-			glog.Errorf("Ingress %s/%s: Invalid value nginx.org/fail-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), failTimeout, err)
+			glog.Errorf("Ingress '%s/%s': Invalid value nginx.org/fail-timeout: got %q: %v", ingEx.Ingress.GetNamespace(), ingEx.Ingress.GetName(), failTimeout, err)
 		} else {
 			cfgParams.FailTimeout = parsedFailTimeout
 		}

@@ -181,7 +181,7 @@ func TestCreateAppProtectPolicyEx(t *testing.T) {
 
 		policyEx, err := createAppProtectPolicyEx(test.policy)
 		if (err != nil) != test.wantErr {
-			t.Errorf("createAppProtectPolicyEx() returned %v, for the case of %s", err, test.msg)
+			t.Errorf("createAppProtectPolicyEx() returned '%v', for the case of '%s'", err, test.msg)
 		}
 		if diff := cmp.Diff(test.expectedPolicyEx, policyEx); diff != "" {
 			t.Errorf("createAppProtectPolicyEx() %q returned unexpected result (-want +got):\n%s", test.msg, diff)
@@ -235,7 +235,7 @@ func TestCreateAppProtectLogConfEx(t *testing.T) {
 
 		policyEx, err := createAppProtectLogConfEx(test.logConf)
 		if (err != nil) != test.wantErr {
-			t.Errorf("createAppProtectLogConfEx() returned %v, for the case of %s", err, test.msg)
+			t.Errorf("createAppProtectLogConfEx() returned '%v', for the case of '%s'", err, test.msg)
 		}
 		if diff := cmp.Diff(test.expectedLogConfEx, policyEx); diff != "" {
 			t.Errorf("createAppProtectLogConfEx() %q returned unexpected result (-want +got):\n%s", test.msg, diff)
@@ -318,7 +318,7 @@ func TestCreateAppProtectUserSigEx(t *testing.T) {
 
 		userSigEx, err := createAppProtectUserSigEx(test.userSig)
 		if (err != nil) != test.wantErr {
-			t.Errorf("createAppProtectUserSigEx() returned %v, for the case of %s", err, test.msg)
+			t.Errorf("createAppProtectUserSigEx() returned '%v', for the case of '%s'", err, test.msg)
 		}
 		if diff := cmp.Diff(test.expectedUserSigEx, userSigEx); diff != "" {
 			t.Errorf("createAppProtectUserSigEx() %q returned unexpected result (-want +got):\n%s", test.msg, diff)
@@ -448,7 +448,7 @@ func TestIsReqSatisfiedByUserSig(t *testing.T) {
 	for _, test := range tests {
 		result := isReqSatisfiedByUserSig(test.sigReq, test.sigEx)
 		if result != test.expected {
-			t.Errorf("Unexpected result in test case %s: got %v, expected: %v", test.msg, result, test.expected)
+			t.Errorf("Unexpected result in test case '%s': got %v, expected: %v", test.msg, result, test.expected)
 		}
 	}
 }
@@ -1176,11 +1176,11 @@ func TestGetAppProtectResource(t *testing.T) {
 	for _, test := range tests {
 		_, err := appProtectConfiguration.GetAppResource(test.kind, test.key)
 		if (err != nil) != test.wantErr {
-			t.Errorf("GetAppResource() returned %v on case %s", err, test.msg)
+			t.Errorf("GetAppResource() returned '%v' on case '%s'", err, test.msg)
 		}
 		if test.wantErr || err != nil {
 			if test.errMsg != err.Error() {
-				t.Errorf("GetAppResource() returned error message %s on case %s (expected %s)", err.Error(), test.msg, test.errMsg)
+				t.Errorf("GetAppResource() returned error message '%s' on case '%s' (expected '%s')", err.Error(), test.msg, test.errMsg)
 			}
 		}
 	}

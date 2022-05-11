@@ -51,10 +51,10 @@ func TestValidateAppProtectPolicy(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateAppProtectPolicy(test.policy)
 		if test.expectErr && err == nil {
-			t.Errorf("validateAppProtectPolicy() returned no error for the case of %s", test.msg)
+			t.Errorf("validateAppProtectPolicy() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("validateAppProtectPolicy() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("validateAppProtectPolicy() returned unexpected error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -117,10 +117,10 @@ func TestValidateAppProtectLogConf(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateAppProtectLogConf(test.logConf)
 		if test.expectErr && err == nil {
-			t.Errorf("validateAppProtectLogConf() returned no error for the case of %s", test.msg)
+			t.Errorf("validateAppProtectLogConf() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("validateAppProtectLogConf() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("validateAppProtectLogConf() returned unexpected error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -170,10 +170,10 @@ func TestValidateAppProtectUserSig(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateAppProtectUserSig(test.userSig)
 		if test.expectErr && err == nil {
-			t.Errorf("validateAppProtectUserSig() returned no error for the case of %s", test.msg)
+			t.Errorf("validateAppProtectUserSig() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("validateAppProtectUserSig() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("validateAppProtectUserSig() returned unexpected error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -216,10 +216,10 @@ func TestCheckForExtRefs(t *testing.T) {
 	for _, test := range tests {
 		refs, err := checkForExtRefs(test.policy)
 		if err != nil {
-			t.Errorf("Error in test case %s: function returned: %v", test.msg, err)
+			t.Errorf("Error in test case '%s': function returned: %v", test.msg, err)
 		}
 		if len(refs) != test.expectFound {
-			t.Errorf("Error in test case %s: found %v expected: %v", test.msg, len(refs), test.expectFound)
+			t.Errorf("Error in test case '%s': found %v expected: %v", test.msg, len(refs), test.expectFound)
 		}
 	}
 }

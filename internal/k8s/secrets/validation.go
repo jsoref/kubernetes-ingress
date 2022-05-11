@@ -72,10 +72,10 @@ func ValidateCASecret(secret *api_v1.Secret) error {
 
 	block, _ := pem.Decode(secret.Data[CAKey])
 	if block == nil {
-		return fmt.Errorf("The data field %s must hold a valid CERTIFICATE PEM block", CAKey)
+		return fmt.Errorf("The data field '%s' must hold a valid CERTIFICATE PEM block", CAKey)
 	}
 	if block.Type != "CERTIFICATE" {
-		return fmt.Errorf("The data field %s must hold a valid CERTIFICATE PEM block, but got '%s'", CAKey, block.Type)
+		return fmt.Errorf("The data field '%s' must hold a valid CERTIFICATE PEM block, but got '%s'", CAKey, block.Type)
 	}
 
 	_, err := x509.ParseCertificate(block.Bytes)

@@ -152,7 +152,7 @@ func TestHasServicePortChanges(t *testing.T) {
 
 	for _, c := range cases {
 		if c.result != hasServicePortChanges(c.a, c.b) {
-			t.Errorf("hasServicePortChanges returned %v, but expected %v for %q case", c.result, !c.result, c.reason)
+			t.Errorf("hasServicePortChanges returned '%v', but expected '%v' for %q case", c.result, !c.result, c.reason)
 		}
 	}
 }
@@ -265,17 +265,17 @@ func TestAreResourcesDifferent(t *testing.T) {
 	for _, test := range tests {
 		result, err := areResourcesDifferent(test.oldR, test.newR)
 		if result != test.expected {
-			t.Errorf("areResourcesDifferent() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("areResourcesDifferent() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 		if test.expectErr != nil {
 			if err == nil {
-				t.Errorf("areResourcesDifferent() returned no error for the case of %s", test.msg)
+				t.Errorf("areResourcesDifferent() returned no error for the case of '%s'", test.msg)
 			} else if test.expectErr.Error() != err.Error() {
-				t.Errorf("areResourcesDifferent() returned an unexpected error '%v' for the case of %s", err, test.msg)
+				t.Errorf("areResourcesDifferent() returned an unexpected error '%v' for the case of '%s'", err, test.msg)
 			}
 		}
 		if test.expectErr == nil && err != nil {
-			t.Errorf("areResourcesDifferent() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("areResourcesDifferent() returned unexpected error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }

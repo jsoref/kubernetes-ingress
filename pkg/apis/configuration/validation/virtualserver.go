@@ -471,7 +471,7 @@ func validateStatusCodeRange(statusRangeStr string) string {
 	}
 
 	if max <= min {
-		return fmt.Sprintf("range limits must be %v < %v", min, max)
+		return fmt.Sprintf("range limits must be %d < %d", min, max)
 	}
 
 	return ""

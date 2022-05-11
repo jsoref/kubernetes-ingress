@@ -191,7 +191,7 @@ func TestValidatePolicies(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validatePolicies(test.policies, field.NewPath("policies"), "default")
 		if len(allErrs) > 0 {
-			t.Errorf("validatePolicies() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validatePolicies() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -257,7 +257,7 @@ func TestValidatePoliciesFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validatePolicies(test.policies, field.NewPath("policies"), "default")
 		if len(allErrs) == 0 {
-			t.Errorf("validatePolicies() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validatePolicies() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -419,10 +419,10 @@ func TestValidateUpstreams(t *testing.T) {
 	for _, test := range tests {
 		allErrs, resultUpstreamNames := vsv.validateUpstreams(test.upstreams, field.NewPath("upstreams"))
 		if len(allErrs) > 0 {
-			t.Errorf("validateUpstreams() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateUpstreams() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 		if !resultUpstreamNames.Equal(test.expectedUpstreamNames) {
-			t.Errorf("validateUpstreams() returned %v expected %v for the case of %s", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
+			t.Errorf("validateUpstreams() returned '%v' expected '%v' for the case of '%s'", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
 		}
 	}
 }
@@ -676,10 +676,10 @@ func TestValidateUpstreamsFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs, resultUpstreamNames := vsv.validateUpstreams(test.upstreams, field.NewPath("upstreams"))
 		if len(allErrs) == 0 {
-			t.Errorf("validateUpstreams() returned no errors for the case of %s", test.msg)
+			t.Errorf("validateUpstreams() returned no errors for the case of '%s'", test.msg)
 		}
 		if !resultUpstreamNames.Equal(test.expectedUpstreamNames) {
-			t.Errorf("validateUpstreams() returned %v expected %v for the case of %s", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
+			t.Errorf("validateUpstreams() returned '%v' expected '%v' for the case of '%s'", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
 		}
 	}
 }
@@ -785,7 +785,7 @@ func TestValidateVirtualServerRoutes(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateVirtualServerRoutes(test.routes, field.NewPath("routes"), test.upstreamNames, "default")
 		if len(allErrs) > 0 {
-			t.Errorf("validateVirtualServerRoutes() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateVirtualServerRoutes() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -836,7 +836,7 @@ func TestValidateVirtualServerRoutesFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateVirtualServerRoutes(test.routes, field.NewPath("routes"), test.upstreamNames, "default")
 		if len(allErrs) == 0 {
-			t.Errorf("validateVirtualServerRoutes() returned no errors for the case of %s", test.msg)
+			t.Errorf("validateVirtualServerRoutes() returned no errors for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -930,7 +930,7 @@ func TestValidateRoute(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateRoute(test.route, field.NewPath("route"), test.upstreamNames, test.isRouteFieldForbidden, "default")
 		if len(allErrs) > 0 {
-			t.Errorf("validateRoute() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateRoute() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -1064,7 +1064,7 @@ func TestValidateRouteFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateRoute(test.route, field.NewPath("route"), test.upstreamNames, test.isRouteFieldForbidden, "default")
 		if len(allErrs) == 0 {
-			t.Errorf("validateRoute() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateRoute() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1139,7 +1139,7 @@ func TestValidateAction(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateAction(test.action, field.NewPath("action"), upstreamNames, "", false)
 		if len(allErrs) > 0 {
-			t.Errorf("validateAction() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateAction() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -1195,7 +1195,7 @@ func TestValidateActionFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateAction(test.action, field.NewPath("action"), upstreamNames, "", false)
 		if len(allErrs) == 0 {
-			t.Errorf("validateAction() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateAction() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1222,7 +1222,7 @@ func TestCaptureVariables(t *testing.T) {
 	for _, test := range tests {
 		result := captureVariables(test.s)
 		if !reflect.DeepEqual(result, test.expected) {
-			t.Errorf("captureVariables(%s) returned %v but expected %v", test.s, result, test.expected)
+			t.Errorf("captureVariables(%s) returned '%v' but expected '%v'", test.s, result, test.expected)
 		}
 	}
 }
@@ -1272,7 +1272,7 @@ func TestValidateRedirectURL(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateRedirectURL(test.redirectURL, field.NewPath("url"), validRedirectVariableNames)
 		if len(allErrs) > 0 {
-			t.Errorf("validateRedirectURL(%s) returned errors %v for valid input for the case of %s", test.redirectURL, allErrs, test.msg)
+			t.Errorf("validateRedirectURL(%s) returned errors %v for valid input for the case of '%s'", test.redirectURL, allErrs, test.msg)
 		}
 	}
 }
@@ -1342,7 +1342,7 @@ func TestValidateRedirectURLFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateRedirectURL(test.redirectURL, field.NewPath("action"), validRedirectVariableNames)
 		if len(allErrs) == 0 {
-			t.Errorf("validateRedirectURL(%s) returned no errors for invalid input for the case of %s", test.redirectURL, test.msg)
+			t.Errorf("validateRedirectURL(%s) returned no errors for invalid input for the case of '%s'", test.redirectURL, test.msg)
 		}
 	}
 }
@@ -1415,7 +1415,7 @@ func TestValidateUpstreamFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateReferencedUpstream(test.upstream, field.NewPath("upstream"), test.upstreamNames)
 		if len(allErrs) == 0 {
-			t.Errorf("validateReferencedUpstream() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateReferencedUpstream() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1684,7 +1684,7 @@ func TestValidateSplitsFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateSplits(test.splits, field.NewPath("splits"), test.upstreamNames, "")
 		if len(allErrs) == 0 {
-			t.Errorf("validateSplits() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateSplits() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1728,7 +1728,7 @@ func TestValidateCondition(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateCondition(test.condition, field.NewPath("condition"))
 		if len(allErrs) > 0 {
-			t.Errorf("validateCondition() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateCondition() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -1782,7 +1782,7 @@ func TestValidateConditionFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateCondition(test.condition, field.NewPath("condition"))
 		if len(allErrs) == 0 {
-			t.Errorf("validateCondition() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateCondition() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1929,7 +1929,7 @@ func TestValidateMatch(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateMatch(test.match, field.NewPath("match"), test.upstreamNames, "")
 		if len(allErrs) > 0 {
-			t.Errorf("validateMatch() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateMatch() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -2022,7 +2022,7 @@ func TestValidateMatchFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := vsv.validateMatch(test.match, field.NewPath("match"), test.upstreamNames, "")
 		if len(allErrs) == 0 {
-			t.Errorf("validateMatch() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateMatch() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -2210,7 +2210,7 @@ func TestValidateVirtualServerRouteSubroutes(t *testing.T) {
 		allErrs := vsv.validateVirtualServerRouteSubroutes(test.routes, field.NewPath("subroutes"), test.upstreamNames,
 			test.pathPrefix, "default")
 		if len(allErrs) > 0 {
-			t.Errorf("validateVirtualServerRouteSubroutes() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateVirtualServerRouteSubroutes() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -2279,7 +2279,7 @@ func TestValidateVirtualServerRouteSubroutesFails(t *testing.T) {
 		allErrs := vsv.validateVirtualServerRouteSubroutes(test.routes, field.NewPath("subroutes"), test.upstreamNames,
 			test.pathPrefix, "default")
 		if len(allErrs) == 0 {
-			t.Errorf("validateVirtualServerRouteSubroutes() returned no errors for the case of %s", test.msg)
+			t.Errorf("validateVirtualServerRouteSubroutes() returned no errors for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -2312,7 +2312,7 @@ func TestValidateUpstreamLBMethod(t *testing.T) {
 		allErrs := validateUpstreamLBMethod(test.method, field.NewPath("lb-method"), test.isPlus)
 
 		if len(allErrs) != 0 {
-			t.Errorf("validateUpstreamLBMethod(%q, %v) returned errors for method %s", test.method, test.isPlus, test.method)
+			t.Errorf("validateUpstreamLBMethod(%q, %v) returned errors for method '%s'", test.method, test.isPlus, test.method)
 		}
 	}
 }
@@ -2337,7 +2337,7 @@ func TestValidateUpstreamLBMethodFails(t *testing.T) {
 		allErrs := validateUpstreamLBMethod(test.method, field.NewPath("lb-method"), test.isPlus)
 
 		if len(allErrs) == 0 {
-			t.Errorf("validateUpstreamLBMethod(%q, %v) returned no errors for method %s", test.method, test.isPlus, test.method)
+			t.Errorf("validateUpstreamLBMethod(%q, %v) returned no errors for method '%s'", test.method, test.isPlus, test.method)
 		}
 	}
 }
@@ -2875,7 +2875,7 @@ func TestValidateQueue(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateQueue(test.upstreamQueue, field.NewPath("queue"))
 		if len(allErrs) != 0 {
-			t.Errorf("validateQueue() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateQueue() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -2899,7 +2899,7 @@ func TestValidateQueueFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateQueue(test.upstreamQueue, field.NewPath("queue"))
 		if len(allErrs) == 0 {
-			t.Errorf("validateQueue() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateQueue() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -3027,7 +3027,7 @@ func TestIsRegexOrExactMatch(t *testing.T) {
 	for _, test := range tests {
 		result := isRegexOrExactMatch(test.path)
 		if result != test.expected {
-			t.Errorf("isRegexOrExactMatch(%v) returned %v but expected %v", test.path, result, test.expected)
+			t.Errorf("isRegexOrExactMatch(%v) returned '%v' but expected '%v'", test.path, result, test.expected)
 		}
 	}
 }
@@ -3787,7 +3787,7 @@ func TestErrorPageHasRequiredFields(t *testing.T) {
 	for _, test := range tests {
 		result := errorPageHasRequiredFields(test.errorPage)
 		if result != test.expected {
-			t.Errorf("errorPageHasRequiredFields(%v) returned %v but expected %v", test.errorPage, result, test.expected)
+			t.Errorf("errorPageHasRequiredFields(%v) returned '%v' but expected '%v'", test.errorPage, result, test.expected)
 		}
 	}
 }

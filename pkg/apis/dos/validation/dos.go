@@ -95,7 +95,7 @@ func ValidateAppProtectDosLogConf(logConf *unstructured.Unstructured) error {
 	lcName := logConf.GetName()
 	err := validation2.ValidateRequiredFields(logConf, appProtectDosLogConfRequiredFields)
 	if err != nil {
-		return fmt.Errorf("error validating App Protect Dos Log Configuration %v: %w", lcName, err)
+		return fmt.Errorf("error validating App Protect Dos Log Configuration '%v': %w", lcName, err)
 	}
 
 	return nil
@@ -133,7 +133,7 @@ func validatePort(value string) error {
 
 func validateAppProtectDosName(name string) error {
 	if len(name) > maxNameLength {
-		return fmt.Errorf("app Protect Dos Name max length is %v", maxNameLength)
+		return fmt.Errorf("app Protect Dos Name max length is %d", maxNameLength)
 	}
 
 	return validation2.ValidateEscapedString(name, "protected-object-one")
@@ -174,7 +174,7 @@ func ValidateAppProtectDosPolicy(policy *unstructured.Unstructured) error {
 
 	err := validation2.ValidateRequiredFields(policy, appProtectDosPolicyRequiredFields)
 	if err != nil {
-		return fmt.Errorf("error validating DosPolicy %v: %w", polName, err)
+		return fmt.Errorf("error validating DosPolicy '%v': %w", polName, err)
 	}
 
 	return nil

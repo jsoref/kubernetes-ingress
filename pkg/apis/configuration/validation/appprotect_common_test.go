@@ -94,10 +94,10 @@ func TestValidateRequiredFields(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateRequiredFields(test.obj, test.fieldsList)
 		if test.expectErr && err == nil {
-			t.Errorf("ValidateRequiredFields() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateRequiredFields() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("ValidateRequiredFields() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("ValidateRequiredFields() returned unexpected error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -189,10 +189,10 @@ func TestValidateRequiredSlices(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateRequiredSlices(test.obj, test.fieldsList)
 		if test.expectErr && err == nil {
-			t.Errorf("ValidateRequiredSlices() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateRequiredSlices() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("ValidateRequiredSlices() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("ValidateRequiredSlices() returned unexpected error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -218,7 +218,7 @@ func TestValidateAppProtectLogDestinationAnnotation(t *testing.T) {
 	for _, nTCase := range negDstAntns {
 		err := ValidateAppProtectLogDestination(nTCase[0])
 		if err == nil {
-			t.Errorf("got no error expected error containing %s", nTCase[1])
+			t.Errorf("got no error expected error containing '%s'", nTCase[1])
 		} else {
 			if !strings.Contains(err.Error(), nTCase[1]) {
 				t.Errorf("got %v expected to contain: %s", err, nTCase[1])

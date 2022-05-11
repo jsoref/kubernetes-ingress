@@ -65,7 +65,7 @@ func ValidateAppProtectPolicy(policy *unstructured.Unstructured) error {
 
 	if len(extRefs) > 0 {
 		for _, ref := range extRefs {
-			glog.V(2).Infof("Warning: Field %s (External reference) is Deprecated.", ref)
+			glog.V(2).Infof("Warning: Field '%s' (External reference) is Deprecated.", ref)
 		}
 	}
 

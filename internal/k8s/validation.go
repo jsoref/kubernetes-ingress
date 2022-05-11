@@ -363,11 +363,11 @@ func validateRelatedAnnotation(name string, validator validatorFunc) annotationV
 		allErrs := field.ErrorList{}
 		val, exists := context.annotations[name]
 		if !exists {
-			return append(allErrs, field.Forbidden(context.fieldPath, fmt.Sprintf("related annotation %s: must be set", name)))
+			return append(allErrs, field.Forbidden(context.fieldPath, fmt.Sprintf("related annotation '%s': must be set", name)))
 		}
 
 		if err := validator(val); err != nil {
-			return append(allErrs, field.Forbidden(context.fieldPath, fmt.Sprintf("related annotation %s: %s", name, err.Error())))
+			return append(allErrs, field.Forbidden(context.fieldPath, fmt.Sprintf("related annotation '%s': %s", name, err.Error())))
 		}
 		return allErrs
 	}

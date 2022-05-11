@@ -103,10 +103,10 @@ func TestValidateTransportServerUpstreams(t *testing.T) {
 	for _, test := range tests {
 		allErrs, resultUpstreamNames := validateTransportServerUpstreams(test.upstreams, field.NewPath("upstreams"), true)
 		if len(allErrs) > 0 {
-			t.Errorf("validateTransportServerUpstreams() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateTransportServerUpstreams() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 		if !resultUpstreamNames.Equal(test.expectedUpstreamNames) {
-			t.Errorf("validateTransportServerUpstreams() returned %v expected %v for the case of %s", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
+			t.Errorf("validateTransportServerUpstreams() returned '%v' expected '%v' for the case of '%s'", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
 		}
 	}
 }
@@ -177,10 +177,10 @@ func TestValidateTransportServerUpstreamsFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs, resultUpstreamNames := validateTransportServerUpstreams(test.upstreams, field.NewPath("upstreams"), true)
 		if len(allErrs) == 0 {
-			t.Errorf("validateTransportServerUpstreams() returned no errors for the case of %s", test.msg)
+			t.Errorf("validateTransportServerUpstreams() returned no errors for the case of '%s'", test.msg)
 		}
 		if !resultUpstreamNames.Equal(test.expectedUpstreamNames) {
-			t.Errorf("validateTransportServerUpstreams() returned %v expected %v for the case of %s", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
+			t.Errorf("validateTransportServerUpstreams() returned '%v' expected '%v' for the case of '%s'", resultUpstreamNames, test.expectedUpstreamNames, test.msg)
 		}
 	}
 }
@@ -507,7 +507,7 @@ func TestValidateIsPotentialTLSPassthroughListener(t *testing.T) {
 	for _, test := range tests {
 		result := isPotentialTLSPassthroughListener(test.listener)
 		if result != test.expected {
-			t.Errorf("isPotentialTLSPassthroughListener(%+v) returned %v but expected %v", test.listener, result, test.expected)
+			t.Errorf("isPotentialTLSPassthroughListener(%+v) returned '%v' but expected '%v'", test.listener, result, test.expected)
 		}
 	}
 }
@@ -569,7 +569,7 @@ func TestValidateTSUpstreamHealthChecks(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateTSUpstreamHealthChecks(test.healthCheck, field.NewPath("healthCheck"))
 		if len(allErrs) > 0 {
-			t.Errorf("validateTSUpstreamHealthChecks() returned errors %v  for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateTSUpstreamHealthChecks() returned errors %v  for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -679,7 +679,7 @@ func TestValidateUpstreamParameters(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateTransportServerUpstreamParameters(test.parameters, field.NewPath("upstreamParameters"), "UDP")
 		if len(allErrs) > 0 {
-			t.Errorf("validateTransportServerUpstreamParameters() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateTransportServerUpstreamParameters() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -708,7 +708,7 @@ func TestValidateSessionParameters(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateSessionParameters(test.parameters, field.NewPath("sessionParameters"))
 		if len(allErrs) > 0 {
-			t.Errorf("validateSessionParameters() returned errors %v for valid input for the case of %s", allErrs, test.msg)
+			t.Errorf("validateSessionParameters() returned errors %v for valid input for the case of '%s'", allErrs, test.msg)
 		}
 	}
 }
@@ -827,7 +827,7 @@ func TestValidateTransportServerActionFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateTransportServerAction(test.action, field.NewPath("action"), upstreamNames)
 		if len(allErrs) == 0 {
-			t.Errorf("validateTransportServerAction() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateTransportServerAction() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }

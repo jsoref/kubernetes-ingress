@@ -47,7 +47,7 @@ func (gcv *GlobalConfigurationValidator) validateListeners(listeners []v1alpha1.
 		} else if listenerNames.Has(l.Name) {
 			allErrs = append(allErrs, field.Duplicate(idxPath.Child("name"), l.Name))
 		} else if portProtocolCombinations.Has(portProtocolKey) {
-			msg := fmt.Sprintf("Duplicated port/protocol combination %s", portProtocolKey)
+			msg := fmt.Sprintf("Duplicated port/protocol combination '%s'", portProtocolKey)
 			allErrs = append(allErrs, field.Duplicate(fieldPath, msg))
 		} else {
 			listenerNames.Insert(l.Name)
@@ -86,7 +86,7 @@ func (gcv *GlobalConfigurationValidator) validateListenerPort(port int, fieldPat
 	allErrs := field.ErrorList{}
 
 	if gcv.forbiddenListenerPorts[port] {
-		msg := fmt.Sprintf("port %v is forbidden", port)
+		msg := fmt.Sprintf("port %d is forbidden", port)
 		return append(allErrs, field.Forbidden(fieldPath, msg))
 	}
 

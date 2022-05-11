@@ -50,7 +50,7 @@ func TestCreateAppProtectDosPolicyEx(t *testing.T) {
 
 		policyEx, err := createAppProtectDosPolicyEx(test.policy)
 		if (err != nil) != test.wantErr {
-			t.Errorf("createAppProtectDosPolicyEx() returned %v, for the case of %s", err, test.msg)
+			t.Errorf("createAppProtectDosPolicyEx() returned '%v', for the case of '%s'", err, test.msg)
 		}
 		if diff := cmp.Diff(test.expectedPolicyEx, policyEx); diff != "" {
 			t.Errorf("createAppProtectDosPolicyEx() %q returned unexpected result (-want +got):\n%s", test.msg, diff)
@@ -104,7 +104,7 @@ func TestCreateAppProtectDosLogConfEx(t *testing.T) {
 
 		policyEx, err := createAppProtectDosLogConfEx(test.logConf)
 		if (err != nil) != test.wantErr {
-			t.Errorf("createAppProtectDosLogConfEx() returned %v, for the case of %s", err, test.msg)
+			t.Errorf("createAppProtectDosLogConfEx() returned '%v', for the case of '%s'", err, test.msg)
 		}
 		if diff := cmp.Diff(test.expectedLogConfEx, policyEx); diff != "" {
 			t.Errorf("createAppProtectDosLogConfEx() %q returned unexpected result (-want +got):\n%s", test.msg, diff)
@@ -543,7 +543,7 @@ func TestGetDosProtected(t *testing.T) {
 	for _, test := range tests {
 		_, err := appProtectConfiguration.getDosProtected(test.key)
 		if (err != nil) != test.wantErr {
-			t.Errorf("getDosProtected() returned %v on case %s", err, test.msg)
+			t.Errorf("getDosProtected() returned '%v' on case '%s'", err, test.msg)
 		}
 		if test.wantErr || err != nil {
 			if test.errMsg != err.Error() {
@@ -590,7 +590,7 @@ func TestGetPolicy(t *testing.T) {
 	for _, test := range tests {
 		_, err := appProtectConfiguration.getPolicy(test.key)
 		if (err != nil) != test.wantErr {
-			t.Errorf("getPolicy() returned %v on case %s", err, test.msg)
+			t.Errorf("getPolicy() returned '%v' on case '%s'", err, test.msg)
 		}
 		if test.wantErr || err != nil {
 			if test.errMsg != err.Error() {
@@ -637,7 +637,7 @@ func TestGetLogConf(t *testing.T) {
 	for _, test := range tests {
 		_, err := appProtectConfiguration.getLogConf(test.key)
 		if (err != nil) != test.wantErr {
-			t.Errorf("getLogConf() returned %v on case %s", err, test.msg)
+			t.Errorf("getLogConf() returned '%v' on case '%s'", err, test.msg)
 		}
 		if test.wantErr || err != nil {
 			if test.errMsg != err.Error() {

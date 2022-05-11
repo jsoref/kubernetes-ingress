@@ -52,7 +52,7 @@ func ObjectCreatedReactor(t *testing.T, b *Builder, expectedObj runtime.Object) 
 		}
 
 		if !reflect.DeepEqual(obj, expectedObj) {
-			t.Errorf("expected %+v to equal %+v", obj, expectedObj)
+			t.Errorf("expected '%+v' to equal '%+v'", obj, expectedObj)
 		}
 
 		return true, obj, nil
@@ -69,7 +69,7 @@ func ObjectDeletedReactor(t *testing.T, b *Builder, obj runtime.Object) coretest
 
 		namespace, name := delAction.GetNamespace(), delAction.GetName()
 		if namespace != metaExpObj.GetNamespace() || name != metaExpObj.GetName() {
-			t.Errorf("expected %s/%s to equal %s/%s", namespace, name, metaExpObj.GetNamespace(), metaExpObj.GetName())
+			t.Errorf("expected '%s/%s' to equal '%s/%s'", namespace, name, metaExpObj.GetNamespace(), metaExpObj.GetName())
 		}
 
 		return true, obj, nil

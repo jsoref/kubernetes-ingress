@@ -359,11 +359,11 @@ func main() {
 
 	ingressClassRes, err := kubeClient.NetworkingV1().IngressClasses().Get(context.TODO(), *ingressClass, meta_v1.GetOptions{})
 	if err != nil {
-		glog.Fatalf("Error when getting IngressClass %v: %v", *ingressClass, err)
+		glog.Fatalf("Error when getting IngressClass '%v': %v", *ingressClass, err)
 	}
 
 	if ingressClassRes.Spec.Controller != k8s.IngressControllerName {
-		glog.Fatalf("IngressClass with name %v has an invalid Spec.Controller %v; expected %v", ingressClassRes.Name, ingressClassRes.Spec.Controller, k8s.IngressControllerName)
+		glog.Fatalf("IngressClass with name '%v' has an invalid Spec.Controller '%v'; expected '%v'", ingressClassRes.Name, ingressClassRes.Spec.Controller, k8s.IngressControllerName)
 	}
 
 	var dynClient dynamic.Interface
@@ -499,7 +499,7 @@ func main() {
 	if *defaultServerSecret != "" {
 		secret, err := getAndValidateSecret(kubeClient, *defaultServerSecret)
 		if err != nil {
-			glog.Fatalf("Error trying to get the default server TLS secret %v: %v", *defaultServerSecret, err)
+			glog.Fatalf("Error trying to get the default server TLS secret '%v': %v", *defaultServerSecret, err)
 		}
 
 		bytes := configs.GenerateCertAndKeyFileContent(secret)
@@ -511,7 +511,7 @@ func main() {
 				// file doesn't exist - it is OK! we will reject TLS connections in the default server
 				sslRejectHandshake = true
 			} else {
-				glog.Fatalf("Error checking the default server TLS cert and key in %s: %v", configs.DefaultServerSecretPath, err)
+				glog.Fatalf("Error checking the default server TLS cert and key in '%s': %v", configs.DefaultServerSecretPath, err)
 			}
 		}
 	}
@@ -519,7 +519,7 @@ func main() {
 	if *wildcardTLSSecret != "" {
 		secret, err := getAndValidateSecret(kubeClient, *wildcardTLSSecret)
 		if err != nil {
-			glog.Fatalf("Error trying to get the wildcard TLS secret %v: %v", *wildcardTLSSecret, err)
+			glog.Fatalf("Error trying to get the wildcard TLS secret '%v': %v", *wildcardTLSSecret, err)
 		}
 
 		bytes := configs.GenerateCertAndKeyFileContent(secret)
@@ -530,7 +530,7 @@ func main() {
 	if *prometheusTLSSecretName != "" {
 		prometheusSecret, err = getAndValidateSecret(kubeClient, *prometheusTLSSecretName)
 		if err != nil {
-			glog.Fatalf("Error trying to get the prometheus TLS secret %v: %v", *prometheusTLSSecretName, err)
+			glog.Fatalf("Error trying to get the prometheus TLS secret '%v': %v", *prometheusTLSSecretName, err)
 		}
 	}
 
@@ -556,13 +556,13 @@ func main() {
 		}
 		cfm, err := kubeClient.CoreV1().ConfigMaps(ns).Get(context.TODO(), name, meta_v1.GetOptions{})
 		if err != nil {
-			glog.Fatalf("Error when getting %v: %v", *nginxConfigMaps, err)
+			glog.Fatalf("Error when getting '%v': %v", *nginxConfigMaps, err)
 		}
 		cfgParams = configs.ParseConfigMap(cfm, *nginxPlus, *appProtect, *appProtectDos)
 		if cfgParams.MainServerSSLDHParamFileContent != nil {
 			fileName, err := nginxManager.CreateDHParam(*cfgParams.MainServerSSLDHParamFileContent)
 			if err != nil {
-				glog.Fatalf("Configmap %s/%s: Could not update dhparams: %v", ns, name, err)
+				glog.Fatalf("Configmap '%s/%s': Could not update dhparams: %v", ns, name, err)
 			} else {
 				cfgParams.MainServerSSLDHParam = fileName
 			}
@@ -807,7 +807,7 @@ func getSocketClient(sockPath string) *http.Client {
 func validateResourceName(lock string) error {
 	allErrs := validation.IsDNS1123Subdomain(lock)
 	if len(allErrs) > 0 {
-		return fmt.Errorf("invalid resource name %v: %v", lock, allErrs)
+		return fmt.Errorf("invalid resource name '%v': %v", lock, allErrs)
 	}
 	return nil
 }
@@ -873,15 +873,15 @@ func validateCIDRorIP(cidr string) error {
 func getAndValidateSecret(kubeClient *kubernetes.Clientset, secretNsName string) (secret *api_v1.Secret, err error) {
 	ns, name, err := k8s.ParseNamespaceName(secretNsName)
 	if err != nil {
-		return nil, fmt.Errorf("could not parse the %v argument: %w", secretNsName, err)
+		return nil, fmt.Errorf("could not parse the '%v' argument: %w", secretNsName, err)
 	}
 	secret, err = kubeClient.CoreV1().Secrets(ns).Get(context.TODO(), name, meta_v1.GetOptions{})
 	if err != nil {
-		return nil, fmt.Errorf("could not get %v: %w", secretNsName, err)
+		return nil, fmt.Errorf("could not get '%v': %w", secretNsName, err)
 	}
 	err = secrets.ValidateTLSSecret(secret)
 	if err != nil {
-		return nil, fmt.Errorf("%v is invalid: %w", secretNsName, err)
+		return nil, fmt.Errorf("'%v' is invalid: %w", secretNsName, err)
 	}
 	return secret, nil
 }

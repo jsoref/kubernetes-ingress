@@ -188,7 +188,7 @@ func (ci *Configuration) AddOrUpdateDosProtectedResource(protectedConf *v1beta1.
 func (ci *Configuration) getPolicy(key string) (*unstructured.Unstructured, error) {
 	obj, ok := ci.dosPolicies[key]
 	if !ok {
-		return nil, fmt.Errorf("DosPolicy %s not found", key)
+		return nil, fmt.Errorf("DosPolicy '%s' not found", key)
 	}
 	if !obj.IsValid {
 		return nil, fmt.Errorf(obj.ErrorMsg)
@@ -199,7 +199,7 @@ func (ci *Configuration) getPolicy(key string) (*unstructured.Unstructured, erro
 func (ci *Configuration) getLogConf(key string) (*unstructured.Unstructured, error) {
 	obj, ok := ci.dosLogConfs[key]
 	if !ok {
-		return nil, fmt.Errorf("DosLogConf %s not found", key)
+		return nil, fmt.Errorf("DosLogConf '%s' not found", key)
 	}
 	if !obj.IsValid {
 		return nil, fmt.Errorf(obj.ErrorMsg)
@@ -214,7 +214,7 @@ func (ci *Configuration) getDosProtected(key string) (*v1beta1.DosProtectedResou
 		}
 		return nil, fmt.Errorf(obj.ErrorMsg)
 	}
-	return nil, fmt.Errorf("DosProtectedResource %s not found", key)
+	return nil, fmt.Errorf("DosProtectedResource '%s' not found", key)
 }
 
 // GetValidDosEx returns a valid DosProtectedResource - extended with referenced policies and logs
@@ -226,7 +226,7 @@ func (ci *Configuration) GetValidDosEx(parentNamespace string, nsName string) (*
 	dosEx := &configs.DosEx{}
 	protectedEx, ok := ci.dosProtectedResource[key]
 	if !ok {
-		return nil, fmt.Errorf("DosProtectedResource %s not found", key)
+		return nil, fmt.Errorf("DosProtectedResource '%s' not found", key)
 	}
 	if !protectedEx.IsValid {
 		return nil, fmt.Errorf(protectedEx.ErrorMsg)

@@ -45,7 +45,7 @@ func TestParseConfigMapWithAppProtectCompressedRequestsAction(t *testing.T) {
 		}
 		result := ParseConfigMap(cm, nginxPlus, hasAppProtect, hasAppProtectDos)
 		if result.MainAppProtectCompressedRequestsAction != test.expect {
-			t.Errorf("ParseConfigMap() returned %q but expected %q for the case %s", result.MainAppProtectCompressedRequestsAction, test.expect, test.msg)
+			t.Errorf("ParseConfigMap() returned %q but expected %q for the case '%s'", result.MainAppProtectCompressedRequestsAction, test.expect, test.msg)
 		}
 	}
 }
@@ -113,7 +113,7 @@ func TestParseConfigMapWithAppProtectReconnectPeriod(t *testing.T) {
 		}
 		result := ParseConfigMap(cm, nginxPlus, hasAppProtect, hasAppProtectDos)
 		if result.MainAppProtectReconnectPeriod != test.expect {
-			t.Errorf("ParseConfigMap() returned %q but expected %q for the case %s", result.MainAppProtectReconnectPeriod, test.expect, test.msg)
+			t.Errorf("ParseConfigMap() returned %q but expected %q for the case '%s'", result.MainAppProtectReconnectPeriod, test.expect, test.msg)
 		}
 	}
 }

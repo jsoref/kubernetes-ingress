@@ -2880,7 +2880,7 @@ func TestChooseObjectMetaWinner(t *testing.T) {
 	for _, test := range tests {
 		result := chooseObjectMetaWinner(test.meta1, test.meta2)
 		if result != test.expected {
-			t.Errorf("chooseObjectMetaWinner() returned %v but expected %v for the case %s", result, test.expected, test.msg)
+			t.Errorf("chooseObjectMetaWinner() returned '%v' but expected '%v' for the case '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -3034,7 +3034,7 @@ func TestSquashResourceChanges(t *testing.T) {
 	for _, test := range tests {
 		result := squashResourceChanges(test.changes)
 		if diff := cmp.Diff(test.expected, result); diff != "" {
-			t.Errorf("squashResourceChanges() returned unexpected result for the case of %s (-want +got):\n%s", test.msg, diff)
+			t.Errorf("squashResourceChanges() returned unexpected result for the case of '%s' (-want +got):\n%s", test.msg, diff)
 		}
 	}
 }
@@ -3175,19 +3175,19 @@ func TestFindResourcesForResourceReference(t *testing.T) {
 	for _, test := range tests {
 		result := configuration.findResourcesForResourceReference("default", "test", test.rc)
 		if diff := cmp.Diff(test.expected, result); diff != "" {
-			t.Errorf("findResourcesForResourceReference() returned unexpected result for the case of %s (-want +got):\n%s", test.msg, diff)
+			t.Errorf("findResourcesForResourceReference() returned unexpected result for the case of '%s' (-want +got):\n%s", test.msg, diff)
 		}
 
 		var noResources []Resource
 
 		result = configuration.findResourcesForResourceReference("default", "wrong", test.rc)
 		if diff := cmp.Diff(noResources, result); diff != "" {
-			t.Errorf("findResourcesForResourceReference() returned unexpected result for the case of %s and wrong name (-want +got):\n%s", test.msg, diff)
+			t.Errorf("findResourcesForResourceReference() returned unexpected result for the case of '%s' and wrong name (-want +got):\n%s", test.msg, diff)
 		}
 
 		result = configuration.findResourcesForResourceReference("wrong", "test", test.rc)
 		if diff := cmp.Diff(noResources, result); diff != "" {
-			t.Errorf("findResourcesForResourceReference() returned unexpected result for the case of %s and wrong namespace (-want +got):\n%s", test.msg, diff)
+			t.Errorf("findResourcesForResourceReference() returned unexpected result for the case of '%s' and wrong namespace (-want +got):\n%s", test.msg, diff)
 		}
 	}
 }
@@ -3352,7 +3352,7 @@ func TestGetTransportServerMetrics(t *testing.T) {
 
 		result := configuration.GetTransportServerMetrics()
 		if diff := cmp.Diff(test.expected, result); diff != "" {
-			t.Errorf("GetTransportServerMetrics() returned unexpected result for the case of %s (-want +got):\n%s", test.msg, diff)
+			t.Errorf("GetTransportServerMetrics() returned unexpected result for the case of '%s' (-want +got):\n%s", test.msg, diff)
 		}
 	}
 }
@@ -3446,7 +3446,7 @@ func TestIsEqualForIngressConfigurations(t *testing.T) {
 	for _, test := range tests {
 		result := test.ingConfig1.IsEqual(test.ingConfig2)
 		if result != test.expected {
-			t.Errorf("IsEqual() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsEqual() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -3504,7 +3504,7 @@ func TestIsEqualForVirtualServers(t *testing.T) {
 	for _, test := range tests {
 		result := test.vsConfig1.IsEqual(test.vsConfig2)
 		if result != test.expected {
-			t.Errorf("IsEqual() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsEqual() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -3603,7 +3603,7 @@ func TestCompareConfigurationProblems(t *testing.T) {
 	for _, test := range tests {
 		result := compareConfigurationProblems(test.problem1, test.problem2)
 		if result != test.expected {
-			t.Errorf("compareConfigurationProblems() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("compareConfigurationProblems() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }

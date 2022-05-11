@@ -125,7 +125,7 @@ func TestValidateListenersFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := gcv.validateListeners(test.listeners, field.NewPath("listeners"))
 		if len(allErrs) == 0 {
-			t.Errorf("validateListeners() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateListeners() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -191,7 +191,7 @@ func TestValidateListenerFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := gcv.validateListener(test.Listener, field.NewPath("listener"))
 		if len(allErrs) == 0 {
-			t.Errorf("validateListener() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateListener() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }

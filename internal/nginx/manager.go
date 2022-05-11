@@ -261,7 +261,7 @@ func (lm *LocalManager) DeleteAppProtectResourceFile(name string) {
 func (lm *LocalManager) ClearAppProtectFolder(name string) {
 	files, err := os.ReadDir(name)
 	if err != nil {
-		glog.Fatalf("Failed to read the App Protect folder %s: %v", name, err)
+		glog.Fatalf("Failed to read the App Protect folder '%s': %v", name, err)
 	}
 	for _, file := range files {
 		lm.DeleteAppProtectResourceFile(fmt.Sprintf("%s/%s", name, file.Name()))

@@ -11,7 +11,7 @@ func TestValidatePort(t *testing.T) {
 	for _, badPort := range badPorts {
 		err := validatePort(badPort)
 		if err == nil {
-			t.Errorf("Expected error for port %v\n", badPort)
+			t.Errorf("Expected error for port %d\n", badPort)
 		}
 	}
 
@@ -19,7 +19,7 @@ func TestValidatePort(t *testing.T) {
 	for _, goodPort := range goodPorts {
 		err := validatePort(goodPort)
 		if err != nil {
-			t.Errorf("Error for valid port:  %v err: %v\n", goodPort, err)
+			t.Errorf("Error for valid port %d err: %v\n", goodPort, err)
 		}
 	}
 }
@@ -75,7 +75,7 @@ func TestParseNginxStatusAllowCIDRs(t *testing.T) {
 		}
 
 		if !reflect.DeepEqual(result, goodCIDR.expected) {
-			t.Errorf("parseNginxStatusAllowCIDRs(%q) returned %v expected %v: ", goodCIDR.input, result, goodCIDR.expected)
+			t.Errorf("parseNginxStatusAllowCIDRs(%q) returned '%v' expected '%v': ", goodCIDR.input, result, goodCIDR.expected)
 		}
 	}
 }

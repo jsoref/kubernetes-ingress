@@ -22,7 +22,7 @@ func TestValidClaims(t *testing.T) {
 		},
 	}
 	if err := c.Valid(); err != nil {
-		t.Fatalf("Failed to verify claims, wanted: %v got %v", nil, err)
+		t.Fatalf("Failed to verify claims, wanted: %v got: %v", nil, err)
 	}
 }
 

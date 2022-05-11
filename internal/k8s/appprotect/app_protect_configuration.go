@@ -207,14 +207,14 @@ func (s appProtectUserSigSlice) Swap(i, j int) {
 func createAppProtectPolicyEx(policyObj *unstructured.Unstructured) (*PolicyEx, error) {
 	err := validation.ValidateAppProtectPolicy(policyObj)
 	if err != nil {
-		errMsg := fmt.Sprintf("Error validating policy %s: %v", policyObj.GetName(), err)
+		errMsg := fmt.Sprintf("Error validating policy '%s': %v", policyObj.GetName(), err)
 		return &PolicyEx{Obj: policyObj, IsValid: false, ErrorMsg: failedValidationErrorMsg}, fmt.Errorf(errMsg)
 	}
 	sigReqs := []SignatureReq{}
 	// Check if policy has signature requirement (revision timestamp) and map them to tags
 	list, found, err := unstructured.NestedSlice(policyObj.Object, "spec", "policy", "signature-requirements")
 	if err != nil {
-		errMsg := fmt.Sprintf("Error retrieving Signature requirements from %s: %v", policyObj.GetName(), err)
+		errMsg := fmt.Sprintf("Error retrieving Signature requirements from '%s': %v", policyObj.GetName(), err)
 		return &PolicyEx{Obj: policyObj, IsValid: false, ErrorMsg: failedValidationErrorMsg}, fmt.Errorf(errMsg)
 	}
 	if found {
@@ -223,7 +223,7 @@ func createAppProtectPolicyEx(policyObj *unstructured.Unstructured) (*PolicyEx, 
 			if reqTag, ok := requirement["tag"]; ok {
 				timeReq, err := buildRevTimes(requirement)
 				if err != nil {
-					errMsg := fmt.Sprintf("Error creating time requirements from %s: %v", policyObj.GetName(), err)
+					errMsg := fmt.Sprintf("Error creating time requirements from '%s': %v", policyObj.GetName(), err)
 					return &PolicyEx{Obj: policyObj, IsValid: false, ErrorMsg: invalidTimestampErrorMsg}, fmt.Errorf(errMsg)
 				}
 				sigReqs = append(sigReqs, SignatureReq{Tag: reqTag.(string), RevTimes: &timeReq})
@@ -399,7 +399,7 @@ func (ci *ConfigurationImpl) GetAppResource(kind, key string) (*unstructured.Uns
 			}
 			return nil, fmt.Errorf(obj.ErrorMsg)
 		}
-		return nil, fmt.Errorf("App Protect Policy %s not found", key)
+		return nil, fmt.Errorf("App Protect Policy '%s' not found", key)
 	case LogConfGVK.Kind:
 		if obj, ok := ci.LogConfs[key]; ok {
 			if obj.IsValid {
@@ -407,7 +407,7 @@ func (ci *ConfigurationImpl) GetAppResource(kind, key string) (*unstructured.Uns
 			}
 			return nil, fmt.Errorf(obj.ErrorMsg)
 		}
-		return nil, fmt.Errorf("App Protect LogConf %s not found", key)
+		return nil, fmt.Errorf("App Protect LogConf '%s' not found", key)
 	case UserSigGVK.Kind:
 		if obj, ok := ci.UserSigs[key]; ok {
 			if obj.IsValid {
@@ -415,9 +415,9 @@ func (ci *ConfigurationImpl) GetAppResource(kind, key string) (*unstructured.Uns
 			}
 			return nil, fmt.Errorf(obj.ErrorMsg)
 		}
-		return nil, fmt.Errorf("App Protect UserSig %s not found", key)
+		return nil, fmt.Errorf("App Protect UserSig '%s' not found", key)
 	}
-	return nil, fmt.Errorf("Unknown App Protect resource kind %s", kind)
+	return nil, fmt.Errorf("Unknown App Protect resource kind '%s'", kind)
 }
 
 // DeletePolicy deletes an App Protect Policy from App Protect Configuration
@@ -599,14 +599,14 @@ func (fc *FakeConfiguration) GetAppResource(kind, key string) (*unstructured.Uns
 		if obj, ok := fc.Policies[key]; ok {
 			return obj.Obj, nil
 		}
-		return nil, fmt.Errorf("App Protect Policy %s not found", key)
+		return nil, fmt.Errorf("App Protect Policy '%s' not found", key)
 	case LogConfGVK.Kind:
 		if obj, ok := fc.LogConfs[key]; ok {
 			return obj.Obj, nil
 		}
-		return nil, fmt.Errorf("App Protect LogConf %s not found", key)
+		return nil, fmt.Errorf("App Protect LogConf '%s' not found", key)
 	}
-	return nil, fmt.Errorf("Unknown App Protect resource kind %s", kind)
+	return nil, fmt.Errorf("Unknown App Protect resource kind '%s'", kind)
 }
 
 // DeletePolicy deletes an App Protect Policy from App Protect Configuration

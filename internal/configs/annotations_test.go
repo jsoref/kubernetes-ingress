@@ -92,10 +92,10 @@ func TestFilterMasterAnnotations(t *testing.T) {
 	sort.Strings(expectedRemovedAnnotations)
 
 	if !reflect.DeepEqual(expectedfilteredMasterAnnotations, masterAnnotations) {
-		t.Errorf("filterMasterAnnotations returned %v, but expected %v", masterAnnotations, expectedfilteredMasterAnnotations)
+		t.Errorf("filterMasterAnnotations returned '%v', but expected '%v'", masterAnnotations, expectedfilteredMasterAnnotations)
 	}
 	if !reflect.DeepEqual(expectedRemovedAnnotations, removedAnnotations) {
-		t.Errorf("filterMasterAnnotations returned %v, but expected %v", removedAnnotations, expectedRemovedAnnotations)
+		t.Errorf("filterMasterAnnotations returned '%v', but expected '%v'", removedAnnotations, expectedRemovedAnnotations)
 	}
 }
 
@@ -124,10 +124,10 @@ func TestFilterMinionAnnotations(t *testing.T) {
 	sort.Strings(expectedRemovedAnnotations)
 
 	if !reflect.DeepEqual(expectedfilteredMinionAnnotations, minionAnnotations) {
-		t.Errorf("filterMinionAnnotations returned %v, but expected %v", minionAnnotations, expectedfilteredMinionAnnotations)
+		t.Errorf("filterMinionAnnotations returned '%v', but expected '%v'", minionAnnotations, expectedfilteredMinionAnnotations)
 	}
 	if !reflect.DeepEqual(expectedRemovedAnnotations, removedAnnotations) {
-		t.Errorf("filterMinionAnnotations returned %v, but expected %v", removedAnnotations, expectedRemovedAnnotations)
+		t.Errorf("filterMinionAnnotations returned '%v', but expected '%v'", removedAnnotations, expectedRemovedAnnotations)
 	}
 }
 
@@ -156,6 +156,6 @@ func TestMergeMasterAnnotationsIntoMinion(t *testing.T) {
 		"nginx.org/proxy-connect-timeout": "20s",
 	}
 	if !reflect.DeepEqual(expectedMergedAnnotations, minionAnnotations) {
-		t.Errorf("mergeMasterAnnotationsIntoMinion returned %v, but expected %v", minionAnnotations, expectedMergedAnnotations)
+		t.Errorf("mergeMasterAnnotationsIntoMinion returned '%v', but expected '%v'", minionAnnotations, expectedMergedAnnotations)
 	}
 }

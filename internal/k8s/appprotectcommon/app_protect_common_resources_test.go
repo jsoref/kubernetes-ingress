@@ -88,7 +88,7 @@ func TestParseResourceReferenceAnnotationList(t *testing.T) {
 	for _, test := range tests {
 		result := ParseResourceReferenceAnnotationList(namespace, test.annotation)
 		if !reflect.DeepEqual(result, test.expected) {
-			t.Errorf("Error in test case %s: got: %v, expected: %v", test.msg, result, test.expected)
+			t.Errorf("Error in test case '%s': got: %v, expected: %v", test.msg, result, test.expected)
 		}
 	}
 }

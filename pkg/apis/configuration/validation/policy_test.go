@@ -262,7 +262,7 @@ func TestValidateAccessControlFails(t *testing.T) {
 	for _, test := range tests {
 		allErrs := validateAccessControl(test.accessControl, field.NewPath("accessControl"))
 		if len(allErrs) == 0 {
-			t.Errorf("validateAccessControl() returned no errors for invalid input for the case of %s", test.msg)
+			t.Errorf("validateAccessControl() returned no errors for invalid input for the case of '%s'", test.msg)
 		}
 	}
 }

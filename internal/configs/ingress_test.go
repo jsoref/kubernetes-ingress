@@ -172,7 +172,7 @@ func TestGenerateIngressPath(t *testing.T) {
 	for _, test := range tests {
 		result := generateIngressPath(test.path, test.pathType)
 		if result != test.expected {
-			t.Errorf("generateIngressPath(%v, %v) returned %v, but expected %v", test.path, test.pathType, result, test.expected)
+			t.Errorf("generateIngressPath(%v, %v) returned '%v', but expected '%v'", test.path, test.pathType, result, test.expected)
 		}
 	}
 }
@@ -953,7 +953,7 @@ func TestIsSSLEnabled(t *testing.T) {
 	for i, tc := range testCases {
 		actual := isSSLEnabled(tc.IsSSLService, ConfigParams{SpiffeServerCerts: tc.SpiffeServerCerts}, &StaticConfigParams{NginxServiceMesh: tc.NginxServiceMesh})
 		if actual != tc.Expected {
-			t.Errorf("isSSLEnabled returned %v but expected %v for the case %v", actual, tc.Expected, i)
+			t.Errorf("isSSLEnabled returned '%v' but expected '%v' for the case %v", actual, tc.Expected, i)
 		}
 	}
 }
@@ -1149,7 +1149,7 @@ func TestAddSSLConfig(t *testing.T) {
 			t.Errorf("addSSLConfig() '%s' mismatch (-want +got):\n%s", test.msg, diff)
 		}
 		if !reflect.DeepEqual(test.expectedWarnings, warnings) {
-			t.Errorf("addSSLConfig() returned %v but expected %v for the case of %s", warnings, test.expectedWarnings, test.msg)
+			t.Errorf("addSSLConfig() returned '%v' but expected '%v' for the case of '%s'", warnings, test.expectedWarnings, test.msg)
 		}
 	}
 }
@@ -1316,7 +1316,7 @@ func TestGenerateJWTConfig(t *testing.T) {
 			t.Errorf("generateJWTConfig() '%s' mismatch for redirectLocation (-want +got):\n%s", test.msg, diff)
 		}
 		if !reflect.DeepEqual(test.expectedWarnings, warnings) {
-			t.Errorf("generateJWTConfig() returned %v but expected %v for the case of %s", warnings, test.expectedWarnings, test.msg)
+			t.Errorf("generateJWTConfig() returned '%v' but expected '%v' for the case of '%s'", warnings, test.expectedWarnings, test.msg)
 		}
 	}
 }

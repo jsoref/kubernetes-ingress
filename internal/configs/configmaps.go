@@ -31,13 +31,13 @@ func ParseConfigMap(cfgm *v1.ConfigMap, nginxPlus bool, hasAppProtect bool, hasA
 	if lbMethod, exists := cfgm.Data["lb-method"]; exists {
 		if nginxPlus {
 			if parsedMethod, err := ParseLBMethodForPlus(lbMethod); err != nil {
-				glog.Errorf("Configmap %s/%s: Invalid value for the lb-method key: got %q: %v", cfgm.GetNamespace(), cfgm.GetName(), lbMethod, err)
+				glog.Errorf("Configmap '%s/%s': Invalid value for the lb-method key: got %q: %v", cfgm.GetNamespace(), cfgm.GetName(), lbMethod, err)
 			} else {
 				cfgParams.LBMethod = parsedMethod
 			}
 		} else {
 			if parsedMethod, err := ParseLBMethod(lbMethod); err != nil {
-				glog.Errorf("Configmap %s/%s: Invalid value for the lb-method key: got %q: %v", cfgm.GetNamespace(), cfgm.GetName(), lbMethod, err)
+				glog.Errorf("Configmap '%s/%s': Invalid value for the lb-method key: got %q: %v", cfgm.GetNamespace(), cfgm.GetName(), lbMethod, err)
 			} else {
 				cfgParams.LBMethod = parsedMethod
 			}
@@ -131,7 +131,7 @@ func ParseConfigMap(cfgm *v1.ConfigMap, nginxPlus bool, hasAppProtect bool, hasA
 			}
 
 			if parsingErrors {
-				glog.Errorf("Configmap %s/%s: There are configuration issues with hsts annotations, skipping options for all hsts settings", cfgm.GetNamespace(), cfgm.GetName())
+				glog.Errorf("Configmap '%s/%s': There are configuration issues with hsts annotations, skipping options for all hsts settings", cfgm.GetNamespace(), cfgm.GetName())
 			} else {
 				cfgParams.HSTS = hsts
 				if existsMA {
@@ -304,7 +304,7 @@ func ParseConfigMap(cfgm *v1.ConfigMap, nginxPlus bool, hasAppProtect bool, hasA
 
 	if _, exists, err := GetMapKeyAsInt(cfgm.Data, "worker-processes", cfgm); exists {
 		if err != nil && cfgm.Data["worker-processes"] != "auto" {
-			glog.Errorf("Configmap %s/%s: Invalid value for worker-processes key: must be an integer or the string 'auto', got %q", cfgm.GetNamespace(), cfgm.GetName(), cfgm.Data["worker-processes"])
+			glog.Errorf("Configmap '%s/%s': Invalid value for worker-processes key: must be an integer or the string 'auto', got %q", cfgm.GetNamespace(), cfgm.GetName(), cfgm.Data["worker-processes"])
 		} else {
 			cfgParams.MainWorkerProcesses = cfgm.Data["worker-processes"]
 		}

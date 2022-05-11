@@ -213,7 +213,7 @@ func TestIngressClassForCustomResources(t *testing.T) {
 
 			result := test.lbc.HasCorrectIngressClass(obj)
 			if result != test.expected {
-				t.Errorf("HasCorrectIngressClass() returned %v but expected %v for the case of %q for %T", result, test.expected, test.msg, obj)
+				t.Errorf("HasCorrectIngressClass() returned '%v' but expected '%v' for the case of %q for %T", result, test.expected, test.msg, obj)
 			}
 		}
 	}
@@ -467,7 +467,7 @@ func TestFormatWarningsMessages(t *testing.T) {
 	result := formatWarningMessages(warnings)
 
 	if result != expected {
-		t.Errorf("formatWarningMessages(%v) returned %v but expected %v", warnings, result, expected)
+		t.Errorf("formatWarningMessages(%v) returned '%v' but expected '%v'", warnings, result, expected)
 	}
 }
 
@@ -598,7 +598,7 @@ func TestGetStatusFromEventTitle(t *testing.T) {
 	for _, test := range tests {
 		result := getStatusFromEventTitle(test.eventTitle)
 		if result != test.expected {
-			t.Errorf("getStatusFromEventTitle(%v) returned %v but expected %v", test.eventTitle, result, test.expected)
+			t.Errorf("getStatusFromEventTitle(%v) returned '%v' but expected '%v'", test.eventTitle, result, test.expected)
 		}
 	}
 }
@@ -812,10 +812,10 @@ func TestGetPodOwnerTypeAndName(t *testing.T) {
 		t.Run(test.desc, func(t *testing.T) {
 			actualType, actualName := getPodOwnerTypeAndName(test.pod)
 			if actualType != test.expType {
-				t.Errorf("getPodOwnerTypeAndName() returned %s for owner type but expected %s", actualType, test.expType)
+				t.Errorf("getPodOwnerTypeAndName() returned '%s' for owner type but expected '%s'", actualType, test.expType)
 			}
 			if actualName != test.expName {
-				t.Errorf("getPodOwnerTypeAndName() returned %s for owner name but expected %s", actualName, test.expName)
+				t.Errorf("getPodOwnerTypeAndName() returned '%s' for owner name but expected '%s'", actualName, test.expName)
 			}
 		})
 	}
@@ -1219,7 +1219,7 @@ func TestAddJWTSecrets(t *testing.T) {
 
 		err := lbc.addJWTSecretRefs(result, test.policies)
 		if (err != nil) != test.wantErr {
-			t.Errorf("addJWTSecretRefs() returned %v, for the case of %v", err, test.msg)
+			t.Errorf("addJWTSecretRefs() returned '%v', for the case of '%v'", err, test.msg)
 		}
 
 		if diff := cmp.Diff(test.expectedSecretRefs, result, cmp.Comparer(errorComparer)); diff != "" {
@@ -1341,7 +1341,7 @@ func TestAddIngressMTLSSecret(t *testing.T) {
 
 		err := lbc.addIngressMTLSSecretRefs(result, test.policies)
 		if (err != nil) != test.wantErr {
-			t.Errorf("addIngressMTLSSecretRefs() returned %v, for the case of %v", err, test.msg)
+			t.Errorf("addIngressMTLSSecretRefs() returned '%v', for the case of '%v'", err, test.msg)
 		}
 
 		if diff := cmp.Diff(test.expectedSecretRefs, result, cmp.Comparer(errorComparer)); diff != "" {
@@ -1559,7 +1559,7 @@ func TestAddEgressMTLSSecrets(t *testing.T) {
 
 		err := lbc.addEgressMTLSSecretRefs(result, test.policies)
 		if (err != nil) != test.wantErr {
-			t.Errorf("addEgressMTLSSecretRefs() returned %v, for the case of %v", err, test.msg)
+			t.Errorf("addEgressMTLSSecretRefs() returned '%v', for the case of '%v'", err, test.msg)
 		}
 		if diff := cmp.Diff(test.expectedSecretRefs, result, cmp.Comparer(errorComparer)); diff != "" {
 			t.Errorf("addEgressMTLSSecretRefs() '%v' mismatch (-want +got):\n%s", test.msg, diff)
@@ -1681,7 +1681,7 @@ func TestAddOidcSecret(t *testing.T) {
 
 		err := lbc.addOIDCSecretRefs(result, test.policies)
 		if (err != nil) != test.wantErr {
-			t.Errorf("addOIDCSecretRefs() returned %v, for the case of %v", err, test.msg)
+			t.Errorf("addOIDCSecretRefs() returned '%v', for the case of '%v'", err, test.msg)
 		}
 
 		if diff := cmp.Diff(test.expectedSecretRefs, result, cmp.Comparer(errorComparer)); diff != "" {

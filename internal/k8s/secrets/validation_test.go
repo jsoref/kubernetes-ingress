@@ -60,7 +60,7 @@ func TestValidateJWKSecretFails(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateJWKSecret(test.secret)
 		if err == nil {
-			t.Errorf("ValidateJWKSecret() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateJWKSecret() returned no error for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -157,7 +157,7 @@ func TestValidateCASecretFails(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateCASecret(test.secret)
 		if err == nil {
-			t.Errorf("ValidateCASecret() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateCASecret() returned no error for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -231,7 +231,7 @@ func TestValidateTLSSecretFails(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateTLSSecret(test.secret)
 		if err == nil {
-			t.Errorf("ValidateTLSSecret() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateTLSSecret() returned no error for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -315,7 +315,7 @@ func TestValidateOIDCSecretFails(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateOIDCSecret(test.secret)
 		if err == nil {
-			t.Errorf("ValidateOIDCSecret() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateOIDCSecret() returned no error for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -384,7 +384,7 @@ func TestValidateSecret(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateSecret(test.secret)
 		if err != nil {
-			t.Errorf("ValidateSecret() returned error %v for the case of %s", err, test.msg)
+			t.Errorf("ValidateSecret() returned error %v for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -433,7 +433,7 @@ func TestValidateSecretFails(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateSecret(test.secret)
 		if err == nil {
-			t.Errorf("ValidateSecret() returned no error for the case of %s", test.msg)
+			t.Errorf("ValidateSecret() returned no error for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -469,7 +469,7 @@ func TestHasCorrectSecretType(t *testing.T) {
 	for _, test := range tests {
 		result := IsSupportedSecretType(test.secretType)
 		if result != test.expected {
-			t.Errorf("IsSupportedSecretType(%v) returned %v but expected %v", test.secretType, result, test.expected)
+			t.Errorf("IsSupportedSecretType(%v) returned '%v' but expected '%v'", test.secretType, result, test.expected)
 		}
 	}
 }

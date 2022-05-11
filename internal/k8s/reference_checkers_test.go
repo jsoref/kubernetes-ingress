@@ -143,7 +143,7 @@ func TestSecretIsReferencedByIngress(t *testing.T) {
 
 		result := rc.IsReferencedByIngress(test.secretNamespace, test.secretName, test.ing)
 		if result != test.expected {
-			t.Errorf("IsReferencedByIngress() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByIngress() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -224,7 +224,7 @@ func TestSecretIsReferencedByMinion(t *testing.T) {
 
 		result := rc.IsReferencedByMinion(test.secretNamespace, test.secretName, test.ing)
 		if result != test.expected {
-			t.Errorf("IsReferencedByMinion() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByMinion() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -293,7 +293,7 @@ func TestSecretIsReferencedByVirtualServer(t *testing.T) {
 
 		result := rc.IsReferencedByVirtualServer(test.secretNamespace, test.secretName, test.vs)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServer() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServer() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -442,13 +442,13 @@ func TestServiceIsReferencedByIngressAndMinion(t *testing.T) {
 
 		result := rc.IsReferencedByIngress(test.serviceNamespace, test.serviceName, test.ing)
 		if result != test.expected {
-			t.Errorf("IsReferencedByIngress() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByIngress() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 
 		// same cases for Minions
 		result = rc.IsReferencedByMinion(test.serviceNamespace, test.serviceName, test.ing)
 		if result != test.expected {
-			t.Errorf("IsReferencedByMinion() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByMinion() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -559,12 +559,12 @@ func TestServiceIsReferencedByVirtualServerAndVirtualServerRoutes(t *testing.T) 
 
 		result := rc.IsReferencedByVirtualServer(test.serviceNamespace, test.serviceName, test.vs)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServer() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServer() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 
 		result = rc.IsReferencedByVirtualServerRoute(test.serviceNamespace, test.serviceName, test.vsr)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServerRoute() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServerRoute() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -638,7 +638,7 @@ func TestIsServiceReferencedByTransportServer(t *testing.T) {
 
 		result := rc.IsReferencedByTransportServer(test.serviceNamespace, test.serviceName, test.ts)
 		if result != test.expected {
-			t.Errorf("IsReferencedByTransportServer() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByTransportServer() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -855,7 +855,7 @@ func TestPolicyIsReferencedByVirtualServerAndVirtualServerRoute(t *testing.T) {
 
 		result := rc.IsReferencedByVirtualServer(test.policyNamespace, test.policyName, test.vs)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServer() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServer() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 
 		if test.vsr == nil {
@@ -864,7 +864,7 @@ func TestPolicyIsReferencedByVirtualServerAndVirtualServerRoute(t *testing.T) {
 
 		result = rc.IsReferencedByVirtualServerRoute(test.policyNamespace, test.policyName, test.vsr)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServerRoute() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServerRoute() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -1001,7 +1001,7 @@ func TestAppProtectResourceIsReferencedByIngresses(t *testing.T) {
 
 		result = rc.IsReferencedByMinion(test.resourceNamespace, test.resourceName, test.ing)
 		if result != false {
-			t.Errorf("IsReferencedByMinion() returned true but expected false for the case of %s", test.msg)
+			t.Errorf("IsReferencedByMinion() returned true but expected false for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1089,7 +1089,7 @@ func TestIsPolicyIsReferenced(t *testing.T) {
 	for _, test := range tests {
 		result := isPolicyReferenced(test.policies, test.resourceNamespace, test.policyNamespace, test.policyName)
 		if result != test.expected {
-			t.Errorf("isPolicyReferenced() returned %v but expected %v for the case of %s", result,
+			t.Errorf("isPolicyReferenced() returned '%v' but expected '%v' for the case of '%s'", result,
 				test.expected, test.msg)
 		}
 	}
@@ -1211,12 +1211,12 @@ func TestEndpointIsReferencedByVirtualServerAndVirtualServerRoutes(t *testing.T)
 
 		result := rc.IsReferencedByVirtualServer(test.serviceNamespace, test.serviceName, test.vs)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServer() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServer() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 
 		result = rc.IsReferencedByVirtualServerRoute(test.serviceNamespace, test.serviceName, test.vsr)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServerRoute() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServerRoute() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }
@@ -1348,12 +1348,12 @@ func TestDosProtectedIsReferencedByIngresses(t *testing.T) {
 
 		result := rc.IsReferencedByIngress(test.resourceNamespace, test.resourceName, test.ing)
 		if result != test.expected {
-			t.Errorf("IsReferencedByIngress() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByIngress() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 
 		result = rc.IsReferencedByMinion(test.resourceNamespace, test.resourceName, test.ing)
 		if result != false {
-			t.Errorf("IsReferencedByMinion() returned true but expected false for the case of %s", test.msg)
+			t.Errorf("IsReferencedByMinion() returned true but expected false for the case of '%s'", test.msg)
 		}
 	}
 }
@@ -1415,7 +1415,7 @@ func TestDosProtectedIsReferencedByVirtualServer(t *testing.T) {
 
 		result := rc.IsReferencedByVirtualServer(test.protectedNamespace, test.protectedName, test.vs)
 		if result != test.expected {
-			t.Errorf("IsReferencedByVirtualServer() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("IsReferencedByVirtualServer() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }

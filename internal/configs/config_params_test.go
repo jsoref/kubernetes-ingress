@@ -25,7 +25,7 @@ func TestNewDefaultConfigParamsUpstreamZoneSize(t *testing.T) {
 		}
 
 		if cfgParams.UpstreamZoneSize != test.expected {
-			t.Errorf("NewDefaultConfigParams(%v) returned %s but expected %s", test.isPlus, cfgParams.UpstreamZoneSize, test.expected)
+			t.Errorf("NewDefaultConfigParams(%v) returned '%s' but expected '%s'", test.isPlus, cfgParams.UpstreamZoneSize, test.expected)
 		}
 	}
 }

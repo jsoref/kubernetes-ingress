@@ -293,7 +293,7 @@ func (b *Builder) AllActionsExecuted() error {
 }
 
 func actionToString(a coretesting.Action) string {
-	return fmt.Sprintf("%s %q in namespace %s", a.GetVerb(), a.GetResource(), a.GetNamespace())
+	return fmt.Sprintf("%s %q in namespace '%s'", a.GetVerb(), a.GetResource(), a.GetNamespace())
 }
 
 // Stop will signal the informers to stop watching changes

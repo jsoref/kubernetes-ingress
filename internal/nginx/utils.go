@@ -14,7 +14,7 @@ func shellOut(cmd string) (err error) {
 	var stdout bytes.Buffer
 	var stderr bytes.Buffer
 
-	glog.V(3).Infof("executing %s", cmd)
+	glog.V(3).Infof("executing '%s'", cmd)
 
 	command := exec.Command("sh", "-c", cmd)
 	command.Stdout = &stdout

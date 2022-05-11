@@ -220,7 +220,7 @@ func TestMetricsPublished(t *testing.T) {
 		t.Errorf("listAndDeleteMetricsPublished return a list of length %d for upstream-2, expected 1", l)
 	}
 	if !reflect.DeepEqual(labelValuesUpstream2[0], labelValueList1) {
-		t.Errorf("listAndDeleteMetricsPublished returned %v for upstream-2, expected: %v", labelValueList1, labelValuesUpstream2[0])
+		t.Errorf("listAndDeleteMetricsPublished returned '%v' for upstream-2, expected '%v'", labelValueList1, labelValuesUpstream2[0])
 	}
 	if _, ok := collector.metricsPublishedMap["upstream-2/10.0.0.0:80"]; ok {
 		t.Errorf("listAndDeleteMetricsPublished did not delete upstream-2 from map")

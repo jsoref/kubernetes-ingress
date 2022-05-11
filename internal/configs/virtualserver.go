@@ -344,7 +344,7 @@ func (vsc *virtualServerConfigurator) GenerateVirtualServerConfig(
 	for _, u := range vsEx.VirtualServer.Spec.Upstreams {
 
 		if (sslConfig == nil || !vsc.cfgParams.HTTP2) && isGRPC(u.Type) {
-			vsc.addWarningf(vsEx.VirtualServer, "gRPC cannot be configured for upstream %s. gRPC requires enabled HTTP/2 and TLS termination.", u.Name)
+			vsc.addWarningf(vsEx.VirtualServer, "gRPC cannot be configured for upstream '%s'. gRPC requires enabled HTTP/2 and TLS termination.", u.Name)
 		}
 
 		upstreamName := virtualServerUpstreamNamer.GetNameForUpstream(u.Name)
@@ -374,7 +374,7 @@ func (vsc *virtualServerConfigurator) GenerateVirtualServerConfig(
 		upstreamNamer := newUpstreamNamerForVirtualServerRoute(vsEx.VirtualServer, vsr)
 		for _, u := range vsr.Spec.Upstreams {
 			if (sslConfig == nil || !vsc.cfgParams.HTTP2) && isGRPC(u.Type) {
-				vsc.addWarningf(vsr, "gRPC cannot be configured for upstream %s. gRPC requires enabled HTTP/2 and TLS termination", u.Name)
+				vsc.addWarningf(vsr, "gRPC cannot be configured for upstream '%s'. gRPC requires enabled HTTP/2 and TLS termination", u.Name)
 			}
 
 			upstreamName := upstreamNamer.GetNameForUpstream(u.Name)
@@ -754,13 +754,13 @@ func (p *policiesCfg) addRateLimitConfig(
 	} else {
 		curOptions := generateLimitReqOptions(rateLimit)
 		if curOptions.DryRun != p.LimitReqOptions.DryRun {
-			res.addWarningf("RateLimit policy %s with limit request option dryRun='%v' is overridden to dryRun='%v' by the first policy reference in this context", polKey, curOptions.DryRun, p.LimitReqOptions.DryRun)
+			res.addWarningf("RateLimit policy '%s' with limit request option dryRun='%v' is overridden to dryRun='%v' by the first policy reference in this context", polKey, curOptions.DryRun, p.LimitReqOptions.DryRun)
 		}
 		if curOptions.LogLevel != p.LimitReqOptions.LogLevel {
-			res.addWarningf("RateLimit policy %s with limit request option logLevel='%v' is overridden to logLevel='%v' by the first policy reference in this context", polKey, curOptions.LogLevel, p.LimitReqOptions.LogLevel)
+			res.addWarningf("RateLimit policy '%s' with limit request option logLevel='%v' is overridden to logLevel='%v' by the first policy reference in this context", polKey, curOptions.LogLevel, p.LimitReqOptions.LogLevel)
 		}
 		if curOptions.RejectCode != p.LimitReqOptions.RejectCode {
-			res.addWarningf("RateLimit policy %s with limit request option rejectCode='%v' is overridden to rejectCode='%v' by the first policy reference in this context", polKey, curOptions.RejectCode, p.LimitReqOptions.RejectCode)
+			res.addWarningf("RateLimit policy '%s' with limit request option rejectCode='%v' is overridden to rejectCode='%v' by the first policy reference in this context", polKey, curOptions.RejectCode, p.LimitReqOptions.RejectCode)
 		}
 	}
 	return res
@@ -774,7 +774,7 @@ func (p *policiesCfg) addJWTAuthConfig(
 ) *validationResults {
 	res := newValidationResults()
 	if p.JWTAuth != nil {
-		res.addWarningf("Multiple jwt policies in the same context is not valid. JWT policy %s will be ignored", polKey)
+		res.addWarningf("Multiple jwt policies in the same context is not valid. JWT policy '%s' will be ignored", polKey)
 		return res
 	}
 
@@ -785,11 +785,11 @@ func (p *policiesCfg) addJWTAuthConfig(
 		secretType = secretRef.Secret.Type
 	}
 	if secretType != "" && secretType != secrets.SecretTypeJWK {
-		res.addWarningf("JWT policy %s references a secret %s of a wrong type '%s', must be '%s'", polKey, jwtSecretKey, secretType, secrets.SecretTypeJWK)
+		res.addWarningf("JWT policy '%s' references a secret '%s' of a wrong type '%s', must be '%s'", polKey, jwtSecretKey, secretType, secrets.SecretTypeJWK)
 		res.isError = true
 		return res
 	} else if secretRef.Error != nil {
-		res.addWarningf("JWT policy %s references an invalid secret %s: %v", polKey, jwtSecretKey, secretRef.Error)
+		res.addWarningf("JWT policy '%s' references an invalid secret '%s': %v", polKey, jwtSecretKey, secretRef.Error)
 		res.isError = true
 		return res
 	}
@@ -812,17 +812,17 @@ func (p *policiesCfg) addIngressMTLSConfig(
 ) *validationResults {
 	res := newValidationResults()
 	if !tls {
-		res.addWarningf("TLS must be enabled in VirtualServer for IngressMTLS policy %s", polKey)
+		res.addWarningf("TLS must be enabled in VirtualServer for IngressMTLS policy '%s'", polKey)
 		res.isError = true
 		return res
 	}
 	if context != specContext {
-		res.addWarningf("IngressMTLS policy %s is not allowed in the %v context", polKey, context)
+		res.addWarningf("IngressMTLS policy '%s' is not allowed in the %v context", polKey, context)
 		res.isError = true
 		return res
 	}
 	if p.IngressMTLS != nil {
-		res.addWarningf("Multiple ingressMTLS policies are not allowed. IngressMTLS policy %s will be ignored", polKey)
+		res.addWarningf("Multiple ingressMTLS policies are not allowed. IngressMTLS policy '%s' will be ignored", polKey)
 		return res
 	}
 
@@ -833,11 +833,11 @@ func (p *policiesCfg) addIngressMTLSConfig(
 		secretType = secretRef.Secret.Type
 	}
 	if secretType != "" && secretType != secrets.SecretTypeCA {
-		res.addWarningf("IngressMTLS policy %s references a secret %s of a wrong type '%s', must be '%s'", polKey, secretKey, secretType, secrets.SecretTypeCA)
+		res.addWarningf("IngressMTLS policy '%s' references a secret '%s' of a wrong type '%s', must be '%s'", polKey, secretKey, secretType, secrets.SecretTypeCA)
 		res.isError = true
 		return res
 	} else if secretRef.Error != nil {
-		res.addWarningf("IngressMTLS policy %q references an invalid secret %s: %v", polKey, secretKey, secretRef.Error)
+		res.addWarningf("IngressMTLS policy %q references an invalid secret '%s': %v", polKey, secretKey, secretRef.Error)
 		res.isError = true
 		return res
 	}
@@ -868,7 +868,7 @@ func (p *policiesCfg) addEgressMTLSConfig(
 	res := newValidationResults()
 	if p.EgressMTLS != nil {
 		res.addWarningf(
-			"Multiple egressMTLS policies in the same context is not valid. EgressMTLS policy %s will be ignored",
+			"Multiple egressMTLS policies in the same context is not valid. EgressMTLS policy '%s' will be ignored",
 			polKey,
 		)
 		return res
@@ -885,11 +885,11 @@ func (p *policiesCfg) addEgressMTLSConfig(
 			secretType = secretRef.Secret.Type
 		}
 		if secretType != "" && secretType != api_v1.SecretTypeTLS {
-			res.addWarningf("EgressMTLS policy %s references a secret %s of a wrong type '%s', must be '%s'", polKey, egressTLSSecret, secretType, api_v1.SecretTypeTLS)
+			res.addWarningf("EgressMTLS policy '%s' references a secret '%s' of a wrong type '%s', must be '%s'", polKey, egressTLSSecret, secretType, api_v1.SecretTypeTLS)
 			res.isError = true
 			return res
 		} else if secretRef.Error != nil {
-			res.addWarningf("EgressMTLS policy %s references an invalid secret %s: %v", polKey, egressTLSSecret, secretRef.Error)
+			res.addWarningf("EgressMTLS policy '%s' references an invalid secret '%s': %v", polKey, egressTLSSecret, secretRef.Error)
 			res.isError = true
 			return res
 		}
@@ -908,11 +908,11 @@ func (p *policiesCfg) addEgressMTLSConfig(
 			secretType = secretRef.Secret.Type
 		}
 		if secretType != "" && secretType != secrets.SecretTypeCA {
-			res.addWarningf("EgressMTLS policy %s references a secret %s of a wrong type '%s', must be '%s'", polKey, trustedCertSecret, secretType, secrets.SecretTypeCA)
+			res.addWarningf("EgressMTLS policy '%s' references a secret '%s' of a wrong type '%s', must be '%s'", polKey, trustedCertSecret, secretType, secrets.SecretTypeCA)
 			res.isError = true
 			return res
 		} else if secretRef.Error != nil {
-			res.addWarningf("EgressMTLS policy %s references an invalid secret %s: %v", polKey, trustedCertSecret, secretRef.Error)
+			res.addWarningf("EgressMTLS policy '%s' references an invalid secret '%s': %v", polKey, trustedCertSecret, secretRef.Error)
 			res.isError = true
 			return res
 		}
@@ -945,7 +945,7 @@ func (p *policiesCfg) addOIDCConfig(
 	res := newValidationResults()
 	if p.OIDC {
 		res.addWarningf(
-			"Multiple oidc policies in the same context is not valid. OIDC policy %s will be ignored",
+			"Multiple oidc policies in the same context is not valid. OIDC policy '%s' will be ignored",
 			polKey,
 		)
 		return res
@@ -954,7 +954,7 @@ func (p *policiesCfg) addOIDCConfig(
 	if oidcPolCfg.oidc != nil {
 		if oidcPolCfg.key != polKey {
 			res.addWarningf(
-				"Only one oidc policy is allowed in a VirtualServer and its VirtualServerRoutes. Can't use %s. Use %s",
+				"Only one oidc policy is allowed in a VirtualServer and its VirtualServerRoutes. Can't use '%s'. Use '%s'",
 				polKey,
 				oidcPolCfg.key,
 			)
@@ -970,11 +970,11 @@ func (p *policiesCfg) addOIDCConfig(
 			secretType = secretRef.Secret.Type
 		}
 		if secretType != "" && secretType != secrets.SecretTypeOIDC {
-			res.addWarningf("OIDC policy %s references a secret %s of a wrong type '%s', must be '%s'", polKey, secretKey, secretType, secrets.SecretTypeOIDC)
+			res.addWarningf("OIDC policy '%s' references a secret '%s' of a wrong type '%s', must be '%s'", polKey, secretKey, secretType, secrets.SecretTypeOIDC)
 			res.isError = true
 			return res
 		} else if secretRef.Error != nil {
-			res.addWarningf("OIDC policy %s references an invalid secret %s: %v", polKey, secretKey, secretRef.Error)
+			res.addWarningf("OIDC policy '%s' references an invalid secret '%s': %v", polKey, secretKey, secretRef.Error)
 			res.isError = true
 			return res
 		}
@@ -1015,7 +1015,7 @@ func (p *policiesCfg) addWAFConfig(
 ) *validationResults {
 	res := newValidationResults()
 	if p.WAF != nil {
-		res.addWarningf("Multiple WAF policies in the same context is not valid. WAF policy %s will be ignored", polKey)
+		res.addWarningf("Multiple WAF policies in the same context is not valid. WAF policy '%s' will be ignored", polKey)
 		return res
 	}
 
@@ -1035,7 +1035,7 @@ func (p *policiesCfg) addWAFConfig(
 		if apPolPath, exists := apResources.Policies[apPolKey]; exists {
 			p.WAF.ApPolicy = apPolPath
 		} else {
-			res.addWarningf("WAF policy %s references an invalid or non-existing App Protect policy %s", polKey, apPolKey)
+			res.addWarningf("WAF policy '%s' references an invalid or non-existing App Protect policy '%s'", polKey, apPolKey)
 			res.isError = true
 			return res
 		}
@@ -1053,9 +1053,9 @@ func (p *policiesCfg) addWAFConfig(
 
 		if logConfPath, ok := apResources.LogConfs[logConfKey]; ok {
 			logDest := generateString(waf.SecurityLog.LogDest, "syslog:server=localhost:514")
-			p.WAF.ApLogConf = []string{fmt.Sprintf("%s %s", logConfPath, logDest)}
+			p.WAF.ApLogConf = []string{fmt.Sprintf("%s '%s'", logConfPath, logDest)}
 		} else {
-			res.addWarningf("WAF policy %s references an invalid or non-existing log config %s", polKey, logConfKey)
+			res.addWarningf("WAF policy '%s' references an invalid or non-existing log config '%s'", polKey, logConfKey)
 			res.isError = true
 		}
 	}
@@ -1071,9 +1071,9 @@ func (p *policiesCfg) addWAFConfig(
 			}
 			if logConfPath, ok := apResources.LogConfs[logConfKey]; ok {
 				logDest := generateString(loco.LogDest, "syslog:server=localhost:514")
-				p.WAF.ApLogConf = append(p.WAF.ApLogConf, fmt.Sprintf("%s %s", logConfPath, logDest))
+				p.WAF.ApLogConf = append(p.WAF.ApLogConf, fmt.Sprintf("%s '%s'", logConfPath, logDest))
 			} else {
-				res.addWarningf("WAF policy %s references an invalid or non-existing log config %s", polKey, logConfKey)
+				res.addWarningf("WAF policy '%s' references an invalid or non-existing log config '%s'", polKey, logConfKey)
 				res.isError = true
 			}
 		}
@@ -1139,7 +1139,7 @@ func (vsc *virtualServerConfigurator) generatePolicies(
 				}
 			}
 		} else {
-			vsc.addWarningf(ownerDetails.owner, "Policy %s is missing or invalid", key)
+			vsc.addWarningf(ownerDetails.owner, "Policy '%s' is missing or invalid", key)
 			return policiesCfg{
 				ErrorReturn: &version2.Return{Code: 500},
 			}
@@ -2152,10 +2152,10 @@ func (vsc *virtualServerConfigurator) generateSSLConfig(owner runtime.Object, tl
 	var rejectHandshake bool
 	if secretType != "" && secretType != api_v1.SecretTypeTLS {
 		rejectHandshake = true
-		vsc.addWarningf(owner, "TLS secret %s is of a wrong type '%s', must be '%s'", tls.Secret, secretType, api_v1.SecretTypeTLS)
+		vsc.addWarningf(owner, "TLS secret '%s' is of a wrong type '%s', must be '%s'", tls.Secret, secretType, api_v1.SecretTypeTLS)
 	} else if secretRef.Error != nil {
 		rejectHandshake = true
-		vsc.addWarningf(owner, "TLS secret %s is invalid: %v", tls.Secret, secretRef.Error)
+		vsc.addWarningf(owner, "TLS secret '%s' is invalid: %v", tls.Secret, secretRef.Error)
 	} else {
 		name = secretRef.Path
 	}
@@ -2214,7 +2214,7 @@ func createUpstreamsForPlus(
 	for _, u := range virtualServerEx.VirtualServer.Spec.Upstreams {
 		isExternalNameSvc := virtualServerEx.ExternalNameSvcs[GenerateExternalNameSvcKey(virtualServerEx.VirtualServer.Namespace, u.Service)]
 		if isExternalNameSvc {
-			glog.V(3).Infof("Service %s is Type ExternalName, skipping NGINX Plus endpoints update via API", u.Service)
+			glog.V(3).Infof("Service '%s' is Type ExternalName, skipping NGINX Plus endpoints update via API", u.Service)
 			continue
 		}
 
@@ -2236,7 +2236,7 @@ func createUpstreamsForPlus(
 				glog.V(
 					3,
 				).Infof(
-					"Service %s is Type ExternalName, skipping NGINX Plus endpoints update via API",
+					"Service '%s' is Type ExternalName, skipping NGINX Plus endpoints update via API",
 					u.Service,
 				)
 				continue
@@ -2297,7 +2297,7 @@ func checkGrpcErrorPageCodes(errorPages errorPageDetails, isGRPC bool, uName str
 		}
 	}
 	if len(c) > 0 {
-		vscWarnings.AddWarningf(errorPages.owner, "The error page configuration for the upstream %s is ignored for status code(s) %v, which cannot be used for GRPC upstreams.", uName, c)
+		vscWarnings.AddWarningf(errorPages.owner, "The error page configuration for the upstream '%s' is ignored for status code(s) %v, which cannot be used for GRPC upstreams.", uName, c)
 	}
 }
 

@@ -185,15 +185,15 @@ func TestValidateDosProtectedResource(t *testing.T) {
 		err := ValidateDosProtectedResource(test.protected)
 		if err != nil {
 			if test.expectErr == "" {
-				t.Errorf("ValidateDosProtectedResource() returned unexpected error: '%v' for the case of: '%s'", err, test.msg)
+				t.Errorf("ValidateDosProtectedResource() returned unexpected error: '%v' for the case of: %s", err, test.msg)
 				continue
 			}
 			if test.expectErr != err.Error() {
-				t.Errorf("ValidateDosProtectedResource() returned error for the case of '%s', expected err: '%s' got err: '%s'", test.msg, test.expectErr, err.Error())
+				t.Errorf("ValidateDosProtectedResource() returned error for the case of '%s', expected err: %s got err: %s", test.msg, test.expectErr, err.Error())
 			}
 		} else {
 			if test.expectErr != "" {
-				t.Errorf("ValidateDosProtectedResource() failed to return expected error: '%v' for the case of: '%s'", test.expectErr, test.msg)
+				t.Errorf("ValidateDosProtectedResource() failed to return expected error: '%v' for the case of: %s", test.expectErr, test.msg)
 			}
 		}
 	}
@@ -221,7 +221,7 @@ func TestValidateAppProtectDosAccessLogDest(t *testing.T) {
 	for _, tCase := range posDstAntns {
 		err := validateAppProtectDosLogDest(tCase)
 		if err != nil {
-			t.Errorf("expected nil, got %v", err)
+			t.Errorf("expected nil, got: %v", err)
 		}
 	}
 
@@ -231,7 +231,7 @@ func TestValidateAppProtectDosAccessLogDest(t *testing.T) {
 			t.Errorf("got no error expected error containing '%s'", nTCase[1])
 		} else {
 			if !strings.Contains(err.Error(), nTCase[1]) {
-				t.Errorf("got '%v', expected: '%s'", err, nTCase[1])
+				t.Errorf("got '%v', expected: %s", err, nTCase[1])
 			}
 		}
 	}
@@ -295,10 +295,10 @@ func TestValidateAppProtectDosLogConf(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateAppProtectDosLogConf(test.logConf)
 		if test.expectErr && err == nil {
-			t.Errorf("validateAppProtectDosLogConf() returned no error for the case of %s", test.msg)
+			t.Errorf("validateAppProtectDosLogConf() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("validateAppProtectDosLogConf() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("validateAppProtectDosLogConf() returned unexpected error '%v' for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -333,10 +333,10 @@ func TestValidateAppProtectDosPolicy(t *testing.T) {
 	for _, test := range tests {
 		err := ValidateAppProtectDosPolicy(test.policy)
 		if test.expectErr && err == nil {
-			t.Errorf("validateAppProtectPolicy() returned no error for the case of %s", test.msg)
+			t.Errorf("validateAppProtectPolicy() returned no error for the case of '%s'", test.msg)
 		}
 		if !test.expectErr && err != nil {
-			t.Errorf("validateAppProtectPolicy() returned unexpected error %v for the case of %s", err, test.msg)
+			t.Errorf("validateAppProtectPolicy() returned unexpected error '%v' for the case of '%s'", err, test.msg)
 		}
 	}
 }
@@ -348,7 +348,7 @@ func TestValidateAppProtectDosName(t *testing.T) {
 
 	// Negative test cases item, expected error message
 	negDstAntns := [][]string{
-		{"very very very very very very very very very very very very very very very very very very long Name", fmt.Sprintf(`app Protect Dos Name max length is %v`, maxNameLength)},
+		{"very very very very very very very very very very very very very very very very very very long Name", fmt.Sprintf(`app Protect Dos Name max length is %d`, maxNameLength)},
 		{"example.com\\", "must have all '\"' (double quotes) escaped and must not end with an unescaped '\\' (backslash) (e.g. 'protected-object-one', regex used for validation is '([^\"\\\\]|\\\\.)*')"},
 		{"\"example.com\"", "must have all '\"' (double quotes) escaped and must not end with an unescaped '\\' (backslash) (e.g. 'protected-object-one', regex used for validation is '([^\"\\\\]|\\\\.)*')"},
 	}
@@ -356,17 +356,17 @@ func TestValidateAppProtectDosName(t *testing.T) {
 	for _, tCase := range posDstAntns {
 		err := validateAppProtectDosName(tCase)
 		if err != nil {
-			t.Errorf("got %v expected nil", err)
+			t.Errorf("got '%v' expected nil", err)
 		}
 	}
 
 	for _, nTCase := range negDstAntns {
 		err := validateAppProtectDosName(nTCase[0])
 		if err == nil {
-			t.Errorf("got no error expected error containing %s", nTCase[1])
+			t.Errorf("got no error expected error containing '%s'", nTCase[1])
 		} else {
 			if !strings.Contains(err.Error(), nTCase[1]) {
-				t.Errorf("got '%v'\n expected: '%s'\n", err, nTCase[1])
+				t.Errorf("got '%v'\n expected: %s\n", err, nTCase[1])
 			}
 		}
 	}
@@ -425,14 +425,14 @@ func TestValidateAppProtectDosMonitor(t *testing.T) {
 	for _, tCase := range posDstAntns {
 		err := validateAppProtectDosMonitor(tCase)
 		if err != nil {
-			t.Errorf("got %v expected nil", err)
+			t.Errorf("got '%v' expected nil", err)
 		}
 	}
 
 	for _, nTCase := range negDstAntns {
 		err := validateAppProtectDosMonitor(nTCase.apDosMonitor)
 		if err == nil {
-			t.Errorf("got no error expected error containing %s", nTCase.msg)
+			t.Errorf("got no error expected error containing '%s'", nTCase.msg)
 		} else {
 			if !strings.Contains(err.Error(), nTCase.msg) {
 				t.Errorf("got: \n%v\n expected to contain: \n%s", err, nTCase.msg)

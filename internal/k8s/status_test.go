@@ -405,7 +405,7 @@ func TestGenerateExternalEndpointsFromStatus(t *testing.T) {
 	endpoints := su.generateExternalEndpointsFromStatus(su.status)
 
 	if !reflect.DeepEqual(endpoints, expectedEndpoints) {
-		t.Errorf("generateExternalEndpointsFromStatus(%v) returned %v but expected %v", su.status, endpoints, expectedEndpoints)
+		t.Errorf("generateExternalEndpointsFromStatus(%v) returned '%v' but expected '%v'", su.status, endpoints, expectedEndpoints)
 	}
 }
 
@@ -464,7 +464,7 @@ func TestHasVsStatusChanged(t *testing.T) {
 		changed := hasVsStatusChanged(&test.vs, state, reason, msg)
 
 		if changed != test.expected {
-			t.Errorf("hasVsStatusChanged(%v, %v, %v, %v) returned %v but expected %v.", test.vs, state, reason, msg, changed, test.expected)
+			t.Errorf("hasVsStatusChanged(%v, %v, %v, %v) returned '%v' but expected '%v'.", test.vs, state, reason, msg, changed, test.expected)
 		}
 	}
 }
@@ -540,7 +540,7 @@ func TestHasVsrStatusChanged(t *testing.T) {
 		changed := hasVsrStatusChanged(&test.vsr, state, reason, msg, referencedBy)
 
 		if changed != test.expected {
-			t.Errorf("hasVsrStatusChanged(%v, %v, %v, %v) returned %v but expected %v.", test.vsr, state, reason, msg, changed, test.expected)
+			t.Errorf("hasVsrStatusChanged(%v, %v, %v, %v) returned '%v' but expected '%v'.", test.vsr, state, reason, msg, changed, test.expected)
 		}
 	}
 }
@@ -571,7 +571,7 @@ func TestGetExternalServicePorts(t *testing.T) {
 	ports := getExternalServicePorts(&svc)
 
 	if ports != expected {
-		t.Errorf("getExternalServicePorts(%v) returned %v but expected %v", svc, ports, expected)
+		t.Errorf("getExternalServicePorts(%v) returned '%v' but expected '%v'", svc, ports, expected)
 	}
 }
 
@@ -628,7 +628,7 @@ func TestIsRequiredPort(t *testing.T) {
 		result := isRequiredPort(test.port)
 
 		if result != test.expected {
-			t.Errorf("isRequiredPort(%+v) returned %v but expected %v", test.port, result, test.expected)
+			t.Errorf("isRequiredPort(%+v) returned '%v' but expected '%v'", test.port, result, test.expected)
 		}
 	}
 }
@@ -688,7 +688,7 @@ func TestHasPolicyStatusChanged(t *testing.T) {
 		changed := hasPolicyStatusChanged(&test.pol, state, reason, msg)
 
 		if changed != test.expected {
-			t.Errorf("hasPolicyStatusChanged(%v, %v, %v, %v) returned %v but expected %v.", test.pol, state, reason, msg, changed, test.expected)
+			t.Errorf("hasPolicyStatusChanged(%v, %v, %v, %v) returned '%v' but expected '%v'.", test.pol, state, reason, msg, changed, test.expected)
 		}
 	}
 }

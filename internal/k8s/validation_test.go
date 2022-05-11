@@ -2204,7 +2204,7 @@ func assertErrors(funcName string, msg string, allErrs field.ErrorList, expected
 		result := strings.Join(errors, "\n")
 		expected := strings.Join(expectedErrors, "\n")
 
-		return fmt.Sprintf("%s returned \n%s \nbut expected \n%s \nfor the case of %s", funcName, result, expected, msg)
+		return fmt.Sprintf("%s returned \n%s \nbut expected \n%s \nfor the case of '%s'", funcName, result, expected, msg)
 	}
 
 	return ""
@@ -2284,7 +2284,7 @@ func TestGetSpecServices(t *testing.T) {
 	for _, test := range tests {
 		result := getSpecServices(test.spec)
 		if !reflect.DeepEqual(result, test.expected) {
-			t.Errorf("getSpecServices() returned %v but expected %v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("getSpecServices() returned '%v' but expected '%v' for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }

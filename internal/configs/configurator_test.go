@@ -86,7 +86,7 @@ func TestAddOrUpdateIngress(t *testing.T) {
 
 	warnings, err := cnf.AddOrUpdateIngress(&ingress)
 	if err != nil {
-		t.Errorf("AddOrUpdateIngress returned:  \n%v, but expected: \n%v", err, nil)
+		t.Errorf("AddOrUpdateIngress returned:\n%v, but expected:\n%v", err, nil)
 	}
 	if len(warnings) != 0 {
 		t.Errorf("AddOrUpdateIngress returned warnings: %v", warnings)
@@ -94,7 +94,7 @@ func TestAddOrUpdateIngress(t *testing.T) {
 
 	cnfHasIngress := cnf.HasIngress(ingress.Ingress)
 	if !cnfHasIngress {
-		t.Errorf("AddOrUpdateIngress didn't add ingress successfully. HasIngress returned %v, expected %v", cnfHasIngress, true)
+		t.Errorf("AddOrUpdateIngress didn't add ingress successfully. HasIngress returned '%v', expected '%v'", cnfHasIngress, true)
 	}
 }
 
@@ -109,7 +109,7 @@ func TestAddOrUpdateMergeableIngress(t *testing.T) {
 
 	warnings, err := cnf.AddOrUpdateMergeableIngress(mergeableIngress)
 	if err != nil {
-		t.Errorf("AddOrUpdateMergeableIngress returned \n%v, expected \n%v", err, nil)
+		t.Errorf("AddOrUpdateMergeableIngress returned\n%v, expected\n%v", err, nil)
 	}
 	if len(warnings) != 0 {
 		t.Errorf("AddOrUpdateMergeableIngress returned warnings: %v", warnings)
@@ -117,7 +117,7 @@ func TestAddOrUpdateMergeableIngress(t *testing.T) {
 
 	cnfHasMergeableIngress := cnf.HasIngress(mergeableIngress.Master.Ingress)
 	if !cnfHasMergeableIngress {
-		t.Errorf("AddOrUpdateMergeableIngress didn't add mergeable ingress successfully. HasIngress returned %v, expected %v", cnfHasMergeableIngress, true)
+		t.Errorf("AddOrUpdateMergeableIngress didn't add mergeable ingress successfully. HasIngress returned '%v', expected '%v'", cnfHasMergeableIngress, true)
 	}
 }
 
@@ -132,7 +132,7 @@ func TestAddOrUpdateIngressFailsWithInvalidIngressTemplate(t *testing.T) {
 
 	warnings, err := cnf.AddOrUpdateIngress(&ingress)
 	if err == nil {
-		t.Errorf("AddOrUpdateIngress returned \n%v,  but expected \n%v", nil, "template execution error")
+		t.Errorf("AddOrUpdateIngress returned\n%v,  but expected\n%v", nil, "template execution error")
 	}
 	if len(warnings) != 0 {
 		t.Errorf("AddOrUpdateIngress returned warnings: %v", warnings)
@@ -150,7 +150,7 @@ func TestAddOrUpdateMergeableIngressFailsWithInvalidIngressTemplate(t *testing.T
 
 	warnings, err := cnf.AddOrUpdateMergeableIngress(mergeableIngress)
 	if err == nil {
-		t.Errorf("AddOrUpdateMergeableIngress returned \n%v, but expected \n%v", nil, "template execution error")
+		t.Errorf("AddOrUpdateMergeableIngress returned\n%v, but expected\n%v", nil, "template execution error")
 	}
 	if len(warnings) != 0 {
 		t.Errorf("AddOrUpdateMergeableIngress returned warnings: %v", warnings)
@@ -169,12 +169,12 @@ func TestUpdateEndpoints(t *testing.T) {
 
 	err = cnf.UpdateEndpoints(ingresses)
 	if err != nil {
-		t.Errorf("UpdateEndpoints returned\n%v, but expected \n%v", err, nil)
+		t.Errorf("UpdateEndpoints returned\n%v, but expected\n%v", err, nil)
 	}
 
 	err = cnf.UpdateEndpoints(ingresses)
 	if err != nil {
-		t.Errorf("UpdateEndpoints returned\n%v, but expected \n%v", err, nil)
+		t.Errorf("UpdateEndpoints returned\n%v, but expected\n%v", err, nil)
 	}
 }
 
@@ -190,12 +190,12 @@ func TestUpdateEndpointsMergeableIngress(t *testing.T) {
 
 	err = cnf.UpdateEndpointsMergeableIngress(mergeableIngresses)
 	if err != nil {
-		t.Errorf("UpdateEndpointsMergeableIngress returned \n%v, but expected \n%v", err, nil)
+		t.Errorf("UpdateEndpointsMergeableIngress returned\n%v, but expected\n%v", err, nil)
 	}
 
 	err = cnf.UpdateEndpointsMergeableIngress(mergeableIngresses)
 	if err != nil {
-		t.Errorf("UpdateEndpointsMergeableIngress returned \n%v, but expected \n%v", err, nil)
+		t.Errorf("UpdateEndpointsMergeableIngress returned\n%v, but expected\n%v", err, nil)
 	}
 }
 
@@ -211,7 +211,7 @@ func TestUpdateEndpointsFailsWithInvalidTemplate(t *testing.T) {
 
 	err = cnf.UpdateEndpoints(ingresses)
 	if err == nil {
-		t.Errorf("UpdateEndpoints returned\n%v, but expected \n%v", nil, "template execution error")
+		t.Errorf("UpdateEndpoints returned\n%v, but expected\n%v", nil, "template execution error")
 	}
 }
 
@@ -227,7 +227,7 @@ func TestUpdateEndpointsMergeableIngressFailsWithInvalidTemplate(t *testing.T) {
 
 	err = cnf.UpdateEndpointsMergeableIngress(mergeableIngresses)
 	if err == nil {
-		t.Errorf("UpdateEndpointsMergeableIngress returned \n%v, but expected \n%v", nil, "template execution error")
+		t.Errorf("UpdateEndpointsMergeableIngress returned\n%v, but expected\n%v", nil, "template execution error")
 	}
 }
 
@@ -244,7 +244,7 @@ func TestGetVirtualServerConfigFileName(t *testing.T) {
 
 	result := getFileNameForVirtualServer(&vs)
 	if result != expected {
-		t.Errorf("getFileNameForVirtualServer returned %v, but expected %v", result, expected)
+		t.Errorf("getFileNameForVirtualServer returned '%v', but expected '%v'", result, expected)
 	}
 }
 
@@ -256,7 +256,7 @@ func TestGetFileNameForVirtualServerFromKey(t *testing.T) {
 
 	result := getFileNameForVirtualServerFromKey(key)
 	if result != expected {
-		t.Errorf("getFileNameForVirtualServerFromKey returned %v, but expected %v", result, expected)
+		t.Errorf("getFileNameForVirtualServerFromKey returned '%v', but expected '%v'", result, expected)
 	}
 }
 
@@ -324,7 +324,7 @@ func TestGenerateTLSPassthroughHostsConfig(t *testing.T) {
 
 	resultCfg := generateTLSPassthroughHostsConfig(tlsPassthroughPairs)
 	if !reflect.DeepEqual(resultCfg, expectedCfg) {
-		t.Errorf("generateTLSPassthroughHostsConfig() returned %v but expected %v", resultCfg, expectedCfg)
+		t.Errorf("generateTLSPassthroughHostsConfig() returned '%v' but expected '%v'", resultCfg, expectedCfg)
 	}
 }
 
@@ -346,7 +346,7 @@ func TestAddInternalRouteConfig(t *testing.T) {
 	}
 	err = cnf.AddInternalRouteConfig()
 	if err != nil {
-		t.Errorf("AddInternalRouteConfig returned:  \n%v, but expected: \n%v", err, nil)
+		t.Errorf("AddInternalRouteConfig returned:\n%v, but expected:\n%v", err, nil)
 	}
 
 	if !cnf.staticCfgParams.EnableInternalRoutes {
@@ -388,7 +388,7 @@ func TestFindRemovedKeys(t *testing.T) {
 	for _, test := range tests {
 		result := findRemovedKeys(test.currentKeys, test.newKeys)
 		if !reflect.DeepEqual(result, test.expected) {
-			t.Errorf("findRemovedKeys(%v, %v) returned %v but expected %v", test.currentKeys, test.newKeys, result, test.expected)
+			t.Errorf("findRemovedKeys(%v, %v) returned '%v' but expected '%v'", test.currentKeys, test.newKeys, result, test.expected)
 		}
 	}
 }
@@ -636,10 +636,10 @@ func TestUpdateIngressMetricsLabels(t *testing.T) {
 	// add labels for a new Ingress resource
 	cnf.updateIngressMetricsLabels(ingEx, upstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateIngressMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateIngressMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 	if !reflect.DeepEqual(testLatencyCollector, expectedLatencyCollector) {
-		t.Errorf("updateIngressMetricsLabels() updated latency collector labels to \n%+v but expected \n%+v", testLatencyCollector, expectedLatencyCollector)
+		t.Errorf("updateIngressMetricsLabels() updated latency collector labels to\n%+v but expected\n%+v", testLatencyCollector, expectedLatencyCollector)
 	}
 
 	updatedUpstreams := []version1.Upstream{
@@ -686,10 +686,10 @@ func TestUpdateIngressMetricsLabels(t *testing.T) {
 	// update labels for an updated Ingress with deleted upstream-2
 	cnf.updateIngressMetricsLabels(ingEx, updatedUpstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateIngressMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateIngressMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 	if !reflect.DeepEqual(testLatencyCollector, expectedLatencyCollector) {
-		t.Errorf("updateIngressMetricsLabels() updated latency collector labels to \n%+v but expected \n%+v", testLatencyCollector, expectedLatencyCollector)
+		t.Errorf("updateIngressMetricsLabels() updated latency collector labels to\n%+v but expected\n%+v", testLatencyCollector, expectedLatencyCollector)
 	}
 
 	upstreamServerLabels = map[string][]string{}
@@ -712,10 +712,10 @@ func TestUpdateIngressMetricsLabels(t *testing.T) {
 	// delete labels for a deleted Ingress
 	cnf.deleteIngressMetricsLabels("default/test-ingress")
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("deleteIngressMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("deleteIngressMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 	if !reflect.DeepEqual(testLatencyCollector, expectedLatencyCollector) {
-		t.Errorf("updateIngressMetricsLabels() updated latency collector labels to \n%+v but expected \n%+v", testLatencyCollector, expectedLatencyCollector)
+		t.Errorf("updateIngressMetricsLabels() updated latency collector labels to\n%+v but expected\n%+v", testLatencyCollector, expectedLatencyCollector)
 	}
 }
 
@@ -807,10 +807,10 @@ func TestUpdateVirtualServerMetricsLabels(t *testing.T) {
 	// add labels for a new VirtualServer resource
 	cnf.updateVirtualServerMetricsLabels(vsEx, upstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateVirtualServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateVirtualServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 	if !reflect.DeepEqual(testLatencyCollector, expectedLatencyCollector) {
-		t.Errorf("updateVirtualServerMetricsLabels() updated latency collector's labels to \n%+v but expected \n%+v", testLatencyCollector, expectedLatencyCollector)
+		t.Errorf("updateVirtualServerMetricsLabels() updated latency collector's labels to\n%+v but expected\n%+v", testLatencyCollector, expectedLatencyCollector)
 	}
 
 	updatedUpstreams := []version2.Upstream{
@@ -857,10 +857,10 @@ func TestUpdateVirtualServerMetricsLabels(t *testing.T) {
 	// update labels for an updated VirtualServer with deleted upstream-2
 	cnf.updateVirtualServerMetricsLabels(vsEx, updatedUpstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateVirtualServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateVirtualServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 	if !reflect.DeepEqual(testLatencyCollector, expectedLatencyCollector) {
-		t.Errorf("updateVirtualServerMetricsLabels() updated latency collector's labels to \n%+v but expected \n%+v", testLatencyCollector, expectedLatencyCollector)
+		t.Errorf("updateVirtualServerMetricsLabels() updated latency collector's labels to\n%+v but expected\n%+v", testLatencyCollector, expectedLatencyCollector)
 	}
 
 	expectedLabelUpdater = &mockLabelUpdater{
@@ -881,11 +881,11 @@ func TestUpdateVirtualServerMetricsLabels(t *testing.T) {
 	// delete labels for a deleted VirtualServer
 	cnf.deleteVirtualServerMetricsLabels("default/test-vs")
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("deleteVirtualServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("deleteVirtualServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 
 	if !reflect.DeepEqual(testLatencyCollector, expectedLatencyCollector) {
-		t.Errorf("updateVirtualServerMetricsLabels() updated latency collector's labels to \n%+v but expected \n%+v", testLatencyCollector, expectedLatencyCollector)
+		t.Errorf("updateVirtualServerMetricsLabels() updated latency collector's labels to\n%+v but expected\n%+v", testLatencyCollector, expectedLatencyCollector)
 	}
 }
 
@@ -972,7 +972,7 @@ func TestUpdateTransportServerMetricsLabels(t *testing.T) {
 
 	cnf.updateTransportServerMetricsLabels(tsEx, streamUpstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateTransportServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateTransportServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 
 	updatedStreamUpstreams := []version2.StreamUpstream{
@@ -1013,7 +1013,7 @@ func TestUpdateTransportServerMetricsLabels(t *testing.T) {
 
 	cnf.updateTransportServerMetricsLabels(tsEx, updatedStreamUpstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateTransportServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateTransportServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 
 	expectedLabelUpdater = &mockLabelUpdater{
@@ -1027,7 +1027,7 @@ func TestUpdateTransportServerMetricsLabels(t *testing.T) {
 
 	cnf.deleteTransportServerMetricsLabels("default/test-transportserver")
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("deleteTransportServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("deleteTransportServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 
 	tsExTLS := &TransportServerEx{
@@ -1087,7 +1087,7 @@ func TestUpdateTransportServerMetricsLabels(t *testing.T) {
 
 	cnf.updateTransportServerMetricsLabels(tsExTLS, streamUpstreams)
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("updateTransportServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("updateTransportServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 
 	expectedLabelUpdater = &mockLabelUpdater{
@@ -1101,7 +1101,7 @@ func TestUpdateTransportServerMetricsLabels(t *testing.T) {
 
 	cnf.deleteTransportServerMetricsLabels("default/test-transportserver-tls")
 	if !reflect.DeepEqual(cnf.labelUpdater, expectedLabelUpdater) {
-		t.Errorf("deleteTransportServerMetricsLabels() updated labels to \n%+v but expected \n%+v", cnf.labelUpdater, expectedLabelUpdater)
+		t.Errorf("deleteTransportServerMetricsLabels() updated labels to\n%+v but expected\n%+v", cnf.labelUpdater, expectedLabelUpdater)
 	}
 }
 
@@ -1197,7 +1197,7 @@ func TestUpdateApResources(t *testing.T) {
 	for _, test := range tests {
 		result := conf.updateApResources(test.ingEx)
 		if !reflect.DeepEqual(result, test.expected) {
-			t.Errorf("updateApResources() returned \n%v but expected\n%v for the case of %s", result, test.expected, test.msg)
+			t.Errorf("updateApResources() returned\n%v but expected\n%v for the case of '%s'", result, test.expected, test.msg)
 		}
 	}
 }

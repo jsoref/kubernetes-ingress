@@ -112,12 +112,12 @@ func (w *spiffeWatcher) OnX509ContextWatchError(err error) {
 	msg := "For more information check the logs of the Spire agents and server."
 	switch status.Code(err) {
 	case codes.Unavailable:
-		glog.V(3).Infof("X509SVIDClient cannot connect to the Spire agent: %v. %s", err, msg)
+		glog.V(3).Infof("X509SVIDClient cannot connect to the Spire agent: %v. '%s'", err, msg)
 	case codes.PermissionDenied:
-		glog.V(3).Infof("X509SVIDClient still waiting for certificates: %v. %s", err, msg)
+		glog.V(3).Infof("X509SVIDClient still waiting for certificates: %v. '%s'", err, msg)
 	case codes.Canceled:
 		return
 	default:
-		glog.V(3).Infof("X509SVIDClient error: %v. %s", err, msg)
+		glog.V(3).Infof("X509SVIDClient error: %v. '%s'", err, msg)
 	}
 }

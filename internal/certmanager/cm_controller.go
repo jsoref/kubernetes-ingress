@@ -192,7 +192,7 @@ func (c *CmController) Run(stopCh <-chan struct{}) {
 		glog.Fatal("error syncing cm queue")
 	}
 
-	glog.V(3).Infof("Queue is %v", c.queue.Len())
+	glog.V(3).Infof("Queue is %d", c.queue.Len())
 
 	go c.runWorker(ctx)
 

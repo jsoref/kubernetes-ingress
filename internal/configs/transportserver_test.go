@@ -24,7 +24,7 @@ func TestUpstreamNamerForTransportServer(t *testing.T) {
 
 	result := upstreamNamer.GetNameForUpstream(upstream)
 	if result != expected {
-		t.Errorf("GetNameForUpstream() returned %s but expected %v", result, expected)
+		t.Errorf("GetNameForUpstream() returned '%s' but expected %v", result, expected)
 	}
 }
 
@@ -58,7 +58,7 @@ func TestTransportServerExString(t *testing.T) {
 	for _, test := range tests {
 		result := test.input.String()
 		if result != test.expected {
-			t.Errorf("TransportServerEx.String() returned %v but expected %v", result, test.expected)
+			t.Errorf("TransportServerEx.String() returned '%v' but expected '%v'", result, test.expected)
 		}
 	}
 }
